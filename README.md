@@ -95,5 +95,5 @@ Club-Wide Branches
    If we choose to merge your changes with the `dev` branch, this means that either we feel your code is ready for contributions from other people, or (if a robot is available for testing) that it is ready to test on the robot.
 
    Once code is tested on the robot, if it is found to be working, it may then *and only then* be pushed to the `master` branch.
-   Remember, our goal is to keep the master branch the clean, working version of the robot. 
+   Remember, our goal is to keep the master branch the clean, working version of the robot.
 > Hotfixes should not be commited until after the competition, and when they are, they should be pushed to the `dev` branch. They will then be reviewd/documented/improved before being pushed to the `master` branch.
