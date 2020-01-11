@@ -15,6 +15,8 @@ class limelight{
         float tx;
         float ty;
 
+        std::shared_ptr<NetworkTable> table;
+
     public:
         limelight();
         float update();

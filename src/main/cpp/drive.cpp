@@ -1,6 +1,6 @@
 #include <iostream>
 #include <frc/smartdashboard/SmartDashboard.h>
-#include <frc/spark.h>
+#include <frc/Spark.h>
 #include <Gamepad.h>
 #include <drive.h>
 
@@ -11,15 +11,15 @@ drive::drive(){
 }
 
 drive::drive(int frontLeft, int backLeft, int frontRight, int backRight){
-    m_frontLeft = new Spark(frontLeft);
-    m_frontRight = new Spark(frontRight);
-    m_backLeft = new Spark(backLeft);
-    m_backRight = new Spark(backRight);
+    m_frontLeft = new frc::Spark(frontLeft);
+    m_frontRight = new frc::Spark(frontRight);
+    m_backLeft = new frc::Spark(backLeft);
+    m_backRight = new frc::Spark(backRight);
 }
 
-int drive::update(double fl_power, double fr_power, double bl_power, double br_power){
-    m_frontLeft->Set(fl_power);
-    m_frontRight->Set(fr_power);
-    m_backLeft->Set(bl_power);
-    m_backRight->Set(br_power);
+int drive::update(double left, double right){
+    m_frontLeft->Set(left);
+    m_frontRight->Set(left);
+    m_backLeft->Set(right);
+    m_backRight->Set(right);
 }

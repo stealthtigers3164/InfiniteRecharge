@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <frc/smartdashboard/SmartDashboard.h>
-#include <frc/spark.h>
+#include <frc/Spark.h>
 #include <Gamepad.h>
 
 class drive{
@@ -17,5 +17,5 @@ class drive{
         drive();
         drive(int frontLeft, int backLeft, int frontRight, int backRight);
         
-        int update(double fl_power, double fr_power, double bl_power, double br_power);
+        int update(double left, double right);
 };

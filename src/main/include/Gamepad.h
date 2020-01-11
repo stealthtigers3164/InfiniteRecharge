@@ -6,8 +6,7 @@
 
 #pragma once
 
-#include <Joystick.h>
-#include <GenericHID.h>
+#include <frc/Joystick.h>
 #include <iostream>
 #include <math.h>
 
@@ -65,16 +64,16 @@ class Gamepad{
         const float* LeftJoystick(){
             float xAxis = _gamepad->GetX(frc::GenericHID::JoystickHand::kLeftHand);
             float yAxis = _gamepad->GetY(frc::GenericHID::JoystickHand::kLeftHand);
-            float vector[2] = {xAxis, yAxis};
-            return vector;
+            float axes[2] = {xAxis, yAxis};
+            return &axes;
         }
 
         //returns a float vector (x, y) for the right joystick
         const float* RightJoystick(){
             float xAxis = _gamepad->GetX(frc::GenericHID::JoystickHand::kRightHand);
             float yAxis = _gamepad->GetY(frc::GenericHID::JoystickHand::kRightHand);
-            float vector[2] = {xAxis, yAxis};
-            return vector;
+            float axes[2] = {xAxis, yAxis};
+            return &axes;
         }
 
         //dpad logic
