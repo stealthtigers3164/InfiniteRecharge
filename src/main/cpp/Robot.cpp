@@ -9,12 +9,37 @@
 
 #include <iostream>
 
+#include <frc/Spark.h>
+
 #include <frc/smartdashboard/SmartDashboard.h>
+
+#include <frc/TimedRobot.h>
+#include <frc/smartdashboard/smartdashboard.h>
+#include <frc/util/color.h>
+
+#include "rev/ColorSensorV3.h"
+#include "rev/ColorMatch.h"
+
+
+  static constexpr auto i2cPort = frc::I2C::Port::kOnboard;
+  rev::ColorSensorV3 m_colorSensor{i2cPort};
+  rev::ColorMatch m_colorMatcher;
+  static constexpr frc::Color kBlueTarget = frc::Color(0.143, 0.427, 0.429);
+  static constexpr frc::Color kGreenTarget = frc::Color(0.197, 0.561, 0.240);
+  static constexpr frc::Color kRedTarget = frc::Color(0.561, 0.232, 0.114);
+  static constexpr frc::Color kYellowTarget = frc::Color(0.361, 0.524, 0.113);
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+  
+  m_colorMatcher.AddColorMatch(kBlueTarget);
+  m_colorMatcher.AddColorMatch(kGreenTarget);
+  m_colorMatcher.AddColorMatch(kRedTarget);
+  m_colorMatcher.AddColorMatch(kYellowTarget);
+
+  motor = new frc::Spark(5);
 }
 
 /**
@@ -25,7 +50,34 @@ void Robot::RobotInit() {
  * <p> This runs after the mode specific periodic functions, but before
  * LiveWindow and SmartDashboard integrated updating.
  */
-void Robot::RobotPeriodic() {}
+void Robot::RobotPeriodic() {
+  frc::Color detectedColor = m_colorSensor.GetColor();
+  std::string colorString;
+  double confidence = 0.0;
+  frc::Color matchedColor = m_colorMatcher.MatchClosestColor(detectedColor, confidence);
+
+  if (matchedColor == kBlueTarget) {
+    colorString = "Blue";
+    motor->Set(-0.25);
+
+  } else if (matchedColor == kRedTarget) {
+    colorString = "Red";
+    motor->Set(1);
+  } else if (matchedColor == kGreenTarget) {
+    colorString = "Green";
+    motor->Set(0.5);
+  } else if (matchedColor == kYellowTarget) {
+    colorString = "Yellow";
+    motor->Set(0.5);
+  } else {
+    colorString = "Unknown";
+  }
+  frc::SmartDashboard::PutNumber("Red", detectedColor.red);
+  frc::SmartDashboard::PutNumber("Green", detectedColor.green);
+  frc::SmartDashboard::PutNumber("Blue", detectedColor.blue);
+  frc::SmartDashboard::PutNumber("Confidence", confidence);
+  frc::SmartDashboard::PutString("Detected Color", colorString);
+}
 
 /**
  * This autonomous (along with the chooser code above) shows how to select
@@ -50,7 +102,6 @@ void Robot::AutonomousInit() {
     // Default Auto goes here
   }
 }
-
 void Robot::AutonomousPeriodic() {
   if (m_autoSelected == kAutoNameCustom) {
     // Custom Auto goes here
