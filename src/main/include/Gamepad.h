@@ -10,8 +10,6 @@
 #include <iostream>
 #include <math.h>
 
-#define PI 3.14159265
-
 using namespace frc;
 
 class Gamepad{
@@ -24,7 +22,7 @@ class Gamepad{
         }
 
         Gamepad(int port){
-            Joystick* _gamepad =  new Joystick(port);
+            _gamepad =  new Joystick(port);
         }
 
         //button numbers subject to change
@@ -61,19 +59,19 @@ class Gamepad{
         }
 
         //returns a float vector (x, y) for the left joystick
-        const float* LeftJoystick(){
+        float* LeftJoystick(){
             float xAxis = _gamepad->GetX(frc::GenericHID::JoystickHand::kLeftHand);
             float yAxis = _gamepad->GetY(frc::GenericHID::JoystickHand::kLeftHand);
             float axes[2] = {xAxis, yAxis};
-            return &axes;
+            return axes;
         }
 
         //returns a float vector (x, y) for the right joystick
-        const float* RightJoystick(){
+        float* RightJoystick(){
             float xAxis = _gamepad->GetX(frc::GenericHID::JoystickHand::kRightHand);
             float yAxis = _gamepad->GetY(frc::GenericHID::JoystickHand::kRightHand);
             float axes[2] = {xAxis, yAxis};
-            return &axes;
+            return axes;
         }
 
         //dpad logic
@@ -84,12 +82,13 @@ class Gamepad{
             //rounded to the nearest integer value (-1, 0, 1)
             int vecx = static_cast<int>(round(cos(degrees * PI/180)));
             int vecy = static_cast<int>(round(sin(degrees * PI/180)));
-            int vector[2] = {vecx, vecy};
-            return vector;
+            int axes[2] = {vecx, vecy};
+            return axes;
         }
     
     private:
 
+        const double PI = 3.14159265;
         Joystick* _gamepad;
 
 };

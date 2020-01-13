@@ -6,19 +6,21 @@
 input::input(){
     controller = new Gamepad(1);
     aligner = new limelight();
+    drivechain = new drive(6, 7, 8, 9);
+
 }
 
-input::update(){
+void input::update(){
     
     //limelight alignment set to A button
-    if (joystick->ButtonA()){
-        double adjustment = std::static_cast<double>(aligner->update());
-        double left = controller->LeftJoystick()[1] + adjustment;
-        double right = controller->RightJoystick()[1] - adjustment;
-        drive::update(right, left);
+    if (controller->ButtonA()){
+        float adjustment = aligner->update();
+        float left = controller->LeftJoystick()[1] + adjustment;
+        float right = controller->RightJoystick()[1] - adjustment;
+        drivechain->update(right, left);
     } else {
-        double left = controller->LeftJoystick()[1];
-        double right = controller->RightJoystick()[1];
-        drive::update(right, left);
+        float left = controller->LeftJoystick()[1];
+        float right = controller->RightJoystick()[1];
+        drivechain->update(right, left);
     }
 }

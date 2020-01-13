@@ -17,5 +17,5 @@ class drive{
         drive();
         drive(int frontLeft, int backLeft, int frontRight, int backRight);
         
-        int update(double left, double right);
+        int update(float left, float right);
 };

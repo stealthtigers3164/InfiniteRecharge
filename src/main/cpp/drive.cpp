@@ -17,7 +17,7 @@ drive::drive(int frontLeft, int backLeft, int frontRight, int backRight){
     m_backRight = new frc::Spark(backRight);
 }
 
-int drive::update(double left, double right){
+int drive::update(float left, float right){
     m_frontLeft->Set(left);
     m_frontRight->Set(left);
     m_backLeft->Set(right);

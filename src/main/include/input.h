@@ -1,5 +1,7 @@
 #pragma once
 #include <Gamepad.h>
+#include <limelight.h>
+#include <drive.h>
 
 //input class
 //detects input from controllers using the gamepad wrapper
@@ -19,5 +21,6 @@ class input{
 
         Gamepad *controller;
         limelight *aligner;
+        drive *drivechain;
 
-}
+};
