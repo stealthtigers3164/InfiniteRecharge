@@ -33,6 +33,10 @@
         m_colorMatcher.AddColorMatch(kRedTarget);
         m_colorMatcher.AddColorMatch(kYellowTarget);
     }
+    bool targetBlue = false;
+    bool targetRed = false;
+    bool targetYellow = true;
+    bool targetGreen = false;
 
     void detectColour(){
         frc::Color detectedColor = m_colorSensor.GetColor();
@@ -42,22 +46,44 @@
 
         if (matchedColor == kBlueTarget) {
             colorString = "Blue";
-            motor->Set(0.25);
+            if(targetYellow){
+                motor->Set(0);
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                motor->Set(0.25);
+            }else{
+                motor->Set(0.25);
+            }
         } else if (matchedColor == kRedTarget) {
             colorString = "Red";
-            motor->Set(0);
+            if(targetRed){
+                motor->Set(0);
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                motor->Set(0.25);
+            }else{
+                motor->Set(0.25);
+            }
         } else if (matchedColor == kGreenTarget) {
             colorString = "Green";
-            motor->Set(0.25);
-            std::this_thread::sleep_for(std::chrono::milliseconds(50));
-            motor->Set(0.25);
-        } else if (matchedColor == kYellowTarget) {
+            if(targetBlue){
+                motor->Set(0);
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                motor->Set(0.25);
+            }else{
+                motor->Set(0.25);
+            }
+        }
+        else if (matchedColor == kYellowTarget) {
             colorString = "Yellow";
-            motor->Set(0.25);
-    
+            if(targetRed){
+                motor->Set(0);
+                std::this_thread::sleep_for(std::chrono::milliseconds(50));
+                motor->Set(0.25);
+            }else{
+                motor->Set(0.25);
+            }
         } else {
             colorString = "Unknown";
-        }
+        }   
 
         frc::SmartDashboard::PutNumber("Red", detectedColor.red);
         frc::SmartDashboard::PutNumber("Green", detectedColor.green);
