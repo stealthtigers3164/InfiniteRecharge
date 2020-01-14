@@ -6,7 +6,7 @@
 input::input(){
     controller = new Gamepad(1);
     aligner = new limelight();
-    drivechain = new drive(6, 7, 8, 9);
+    drivechain = new drive(1, 2, 3, 4);
 
 }
 
@@ -18,7 +18,7 @@ void input::update(){
         float left = controller->LeftJoystick()[1] + adjustment;
         float right = controller->RightJoystick()[1] - adjustment;
         drivechain->update(right, left);
-    } else {
+    } else { 
         float left = controller->LeftJoystick()[1];
         float right = controller->RightJoystick()[1];
         drivechain->update(right, left);

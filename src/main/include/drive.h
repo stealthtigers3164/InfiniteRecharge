@@ -15,7 +15,7 @@ class drive{
 
     public:
         drive();
-        drive(int frontLeft, int backLeft, int frontRight, int backRight);
+        drive(int backLeft, int frontLeft, int frontRight, int backRight);
         
         int update(float left, float right);
 };
