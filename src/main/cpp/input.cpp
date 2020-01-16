@@ -1,13 +1,13 @@
 #include <input.h>
 #include <limelight.h>
 #include <drive.h>
+#include <Gamepad.h>
 
 //constructor
 input::input(){
     controller = new Gamepad(1);
     aligner = new limelight();
     drivechain = new drive(1, 2, 3, 4);
-
 }
 
 void input::update(){

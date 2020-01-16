@@ -21,5 +21,5 @@ int drive::update(float left, float right){
     m_frontLeft->Set(left);
     m_frontRight->Set(left);
     m_backLeft->Set(right);
-    //m_backRight->Set(right);
+    m_backRight->Set(right);
 }
