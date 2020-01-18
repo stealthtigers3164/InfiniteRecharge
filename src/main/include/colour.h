@@ -12,6 +12,7 @@
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/Joystick.h>
+#include <frc/smartdashboard/smartdashboard.h>
 
 #include "Robot.h"
 #include "rev/ColorSensorV3.h"
@@ -26,56 +27,74 @@
     static constexpr frc::Color kYellowTarget = frc::Color(0.361, 0.524, 0.113);
 
     frc::Spark *motor = new frc::Spark(5); 
+    bool spinnedEnough = false;
 
-
-    void declaration(){
+     void declaration(){
         m_colorMatcher.AddColorMatch(kBlueTarget);
         m_colorMatcher.AddColorMatch(kGreenTarget);
         m_colorMatcher.AddColorMatch(kRedTarget);
         m_colorMatcher.AddColorMatch(kYellowTarget);
-    }
-    bool targetBlue = false;
+        frc::SmartDashboard::PutNumber("Colour", 0);
+    }   
+  
+    bool targetGreen = false;
     bool targetRed = false;
-    bool targetYellow = false;
-    bool targetGreen = true;
+    bool targetBlue = false;
+    bool targetYellow = true;
+
+    double speed = 0.225;
+    bool jg = false;
+
+    void checkSleep(){
+        if(!jg){
+            motor->Set(-0.2);
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
+            motor->Set(0);
+            jg = true;
+        }else{
+            motor->Set(0);
+        }
+    }
     void detectColour(){
         frc::Color detectedColor = m_colorSensor.GetColor();
         std::string colorString;
         double confidence = 0.0;
         frc::Color matchedColor = m_colorMatcher.MatchClosestColor(detectedColor, confidence);
+        motor->Set(speed);
         if (matchedColor == kBlueTarget) {
             colorString = "Blue";
             if(targetBlue){
-                motor->Set(0);
+                checkSleep();
+                
             }else{
-                motor->Set(0.225);
+                motor->Set(speed);
             }
+            
         } else if (matchedColor == kRedTarget) {
             colorString = "Red";
            if(targetRed){
-               motor->Set(0);
+               checkSleep();
             }else{
-                motor->Set(0.225);
+                motor->Set(speed);
             }
         } else if (matchedColor == kGreenTarget) {
             colorString = "Green";
             if(targetGreen){
-                motor->Set(0);
+                checkSleep();
             }else{
-                motor->Set(0.225);
+                motor->Set(speed);
             }
         }
         else if (matchedColor == kYellowTarget) {
             colorString = "Yellow";
             if(targetYellow){
-                motor->Set(0);
+               checkSleep();
             }else{
-                motor->Set(0.225);
+                motor->Set(speed);
             }
         } else {
             colorString = "Unknown";
-        }   
-
+        }
         frc::SmartDashboard::PutNumber("Red", detectedColor.red);
         frc::SmartDashboard::PutNumber("Green", detectedColor.green);
         frc::SmartDashboard::PutNumber("Blue", detectedColor.blue);
