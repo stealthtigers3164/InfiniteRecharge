@@ -28,7 +28,11 @@
   static constexpr frc::Color kYellowTarget = frc::Color(0.361, 0.524, 0.113);
 
     frc::Spark *motor = new frc::Spark(5); 
-    bool spinnedEnough = false;
+bool es = false;
+    bool targetGreen = false;
+    bool targetRed = false;
+    bool targetBlue = true;
+    bool targetYellow = false;
 
      void declaration(){
         m_colorMatcher.AddColorMatch(kBlueTarget);
@@ -36,19 +40,12 @@
         m_colorMatcher.AddColorMatch(kRedTarget);
         m_colorMatcher.AddColorMatch(kYellowTarget);
         frc::SmartDashboard::PutNumber("Colour", 0);
-        motor->Set(0.5);
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
-        motor->Set(0);
-        std::this_thread::sleep_for(std::chrono::milliseconds(200));
-    }   
+       }   
   
-    bool targetGreen = false;
-    bool targetRed = false;
-    bool targetBlue = false;
-    bool targetYellow = false;
+
 
     double speed = 0.25;
-
+    
     void detectColour(){
         frc::Color detectedColor = m_colorSensor.GetColor();
         std::string colorString;
