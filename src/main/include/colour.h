@@ -54,32 +54,32 @@
         double confidence = 0.0;
         frc::Color matchedColor = m_colorMatcher.MatchClosestColor(detectedColor, confidence);
         motor->Set(speed);
-         gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
-        if(gameData.length() > 0){
+        gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+       if(gameData.length() > 0){
         switch (gameData[0]){
             case 'B' :
-            targetBlue = true;
-            targetGreen = false;
-            targetRed = false;
-            targetYellow = false;
-            break;
-            case 'G' :
-            targetBlue = false;
-            targetGreen = true;
-            targetRed = false;
-            targetYellow = false;
-            break;
-            case 'R' :
             targetBlue = false;
             targetGreen = false;
             targetRed = true;
             targetYellow = false;
             break;
-            case 'Y' :
-            targetBlue = true;
+            case 'G' :
+            targetBlue = false;
             targetGreen = false;
             targetRed = false;
             targetYellow = true;
+            break;
+            case 'R' :
+            targetBlue = true;
+            targetGreen = false;
+            targetRed = false;
+            targetYellow = false;
+            break;
+            case 'Y' :
+            targetBlue = false;
+            targetGreen = true;
+            targetRed = false;
+            targetYellow = false;
             break;
             default :
             //This is corrupt data
