@@ -17,6 +17,7 @@
 #include "Robot.h"
 #include "rev/ColorSensorV3.h"
 #include "rev/ColorMatch.h"
+#include <frc/DriverStation.h>
 
 
     static constexpr auto i2cPort = frc::I2C::Port::kOnboard;
@@ -28,12 +29,13 @@
   static constexpr frc::Color kYellowTarget = frc::Color(0.361, 0.524, 0.113);
 
     frc::Spark *motor = new frc::Spark(5); 
-bool es = false;
     bool targetGreen = false;
     bool targetRed = false;
-    bool targetBlue = true;
+    bool targetBlue = false;
     bool targetYellow = false;
 
+    std::string gameData;
+   
      void declaration(){
         m_colorMatcher.AddColorMatch(kBlueTarget);
         m_colorMatcher.AddColorMatch(kGreenTarget);
@@ -44,7 +46,7 @@ bool es = false;
   
 
 
-    double speed = 0.25;
+    double speed = 0.26;
     
     void detectColour(){
         frc::Color detectedColor = m_colorSensor.GetColor();
@@ -52,6 +54,43 @@ bool es = false;
         double confidence = 0.0;
         frc::Color matchedColor = m_colorMatcher.MatchClosestColor(detectedColor, confidence);
         motor->Set(speed);
+         gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
+        if(gameData.length() > 0){
+        switch (gameData[0]){
+            case 'B' :
+            targetBlue = true;
+            targetGreen = false;
+            targetRed = false;
+            targetYellow = false;
+            break;
+            case 'G' :
+            targetBlue = false;
+            targetGreen = true;
+            targetRed = false;
+            targetYellow = false;
+            break;
+            case 'R' :
+            targetBlue = false;
+            targetGreen = false;
+            targetRed = true;
+            targetYellow = false;
+            break;
+            case 'Y' :
+            targetBlue = true;
+            targetGreen = false;
+            targetRed = false;
+            targetYellow = true;
+            break;
+            default :
+            //This is corrupt data
+            break;
+        }
+        }else{
+            targetBlue = false;
+            targetGreen = false;
+            targetRed = false;
+            targetYellow = false;
+        }
         if (matchedColor == kBlueTarget) {
             colorString = "Blue";
             if(targetBlue){
