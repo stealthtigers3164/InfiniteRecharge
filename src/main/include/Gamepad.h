@@ -95,7 +95,7 @@ class Gamepad{
         //returns a float vector (x, y) for the left joystick
         float* LeftJoystick(){
             LJoyAxes[0] = _gamepad->GetRawAxis(0);
-            RJoyAxes[1] = _gamepad->GetRawAxis(1);
+            LJoyAxes[1] = _gamepad->GetRawAxis(1);
             //static float axes[2] = {xAxis, yAxis};
             return LJoyAxes;
         }
