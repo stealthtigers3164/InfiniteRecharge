@@ -11,16 +11,28 @@
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
+#include <frc/util/color.h>
+
 #include <input.h>
+
+#include <colour.h>
+
 
 Robot::Robot(){
   humani = new input();
 }
 
+
+
+
+
+  
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+  declaration();
+  
 }
 
 /**
@@ -33,6 +45,7 @@ void Robot::RobotInit() {
  */
 void Robot::RobotPeriodic() {
   humani->update();
+  detectColour();  
 }
 
 /**
@@ -58,7 +71,6 @@ void Robot::AutonomousInit() {
     // Default Auto goes here
   }
 }
-
 void Robot::AutonomousPeriodic() {
   if (m_autoSelected == kAutoNameCustom) {
     // Custom Auto goes here
