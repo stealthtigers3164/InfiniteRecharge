@@ -12,7 +12,11 @@
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
 
+<<<<<<< HEAD
 #include <input.h>
+=======
+#include <frc/Spark.h>
+>>>>>>> duarteh
 
 class Robot : public frc::TimedRobot {
  public:
@@ -33,4 +37,6 @@ class Robot : public frc::TimedRobot {
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
+
+  frc::Spark *motor;
 };
