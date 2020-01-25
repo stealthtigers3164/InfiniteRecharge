@@ -28,6 +28,7 @@
     static constexpr frc::Color kGreenTarget = frc::Color(0.197, 0.561, 0.240);
     static constexpr frc::Color kRedTarget = frc::Color(0.561, 0.232, 0.114);
     static constexpr frc::Color kYellowTarget = frc::Color(0.361, 0.524, 0.113);
+    static constexpr frc::Color kUnknownTarget = frc::Color(0.0000, 0.0000, 0.0000);
     frc::Spark *motor = new frc::Spark(5); 
     //The following 4 lines are the booleans that are activated with the switch break
     bool targetGreen = false;
@@ -47,10 +48,12 @@
   
     
 
-    double speed = 0.26;
-    
+    double speed = 0.25;
+    //The method/function spin should not be enabled at the same time that detectColour is.
+
+
     //Repeated during Periodic
-    void detectColour(){
+     void detectColour(){
         frc::Color detectedColor = m_colorSensor.GetColor();
         std::string colorString;
         double confidence = 0.0;
@@ -105,7 +108,7 @@
             
         } else if (matchedColor == kRedTarget) {
             colorString = "Red";
-           if(targetRed){
+            if(targetRed){
                motor->Set(0);
             }else{
                 motor->Set(speed);
@@ -135,3 +138,114 @@
         frc::SmartDashboard::PutNumber("Confidence", confidence);
         frc::SmartDashboard::PutString("Detected Color", colorString);
     }
+
+    bool spinned = false;
+    int i = 0;
+    /*void checkInitialColour(){
+        if (matchedColor == kBlueTarget) {
+            frc::Color initColor = kBlueTarget;
+        } else if (matchedColor == kRedTarget) {
+            frc::Color initColor = kRedTarget;
+        } else if (matchedColor == kGreenTarget) {
+            frc::Color initColor = kGreenTarget;
+        }
+        else if (matchedColor == kYellowTarget) {
+            frc::Color initColor = kYellowTarget;
+        } else {
+            colorString = "Unknown";
+        }
+    }*/
+    char prev = 'U';
+    char colour = 'X';
+
+    void readAct(){
+        frc::Color detectedColor = m_colorSensor.GetColor();
+        std::string colorString;
+        double confidence = 0.0;
+        frc::Color matchedColor = m_colorMatcher.MatchClosestColor(detectedColor, confidence);
+        if(matchedColor == kRedTarget){
+                colour = 'R';
+        }
+        if(matchedColor == kBlueTarget){
+                colour = 'B';
+        }
+        if(matchedColor == kYellowTarget){
+                colour = 'Y';
+        }
+        if(matchedColor == kGreenTarget){
+                colour = 'G';
+        }
+    }
+    void spin(){
+        motor->Set(speed);
+        while(i < 8){
+            if(prev != colour){
+                i++;
+                frc::SmartDashboard::PutNumber("I", i+4);
+                printf("I am: %c" + i);
+            }
+            readAct();
+            prev = colour;
+            if(i == 7){
+                speed = 0;
+                spinned = true;
+            }
+        }
+
+        /*if (matchedColor == kBlueTarget) {
+            colorString = "Blue";
+        } else if (matchedColor == kRedTarget) {
+            colorString = "Red";
+        } else if (matchedColor == kGreenTarget) {
+            colorString = "Green";
+        }
+        else if (matchedColor == kYellowTarget) {
+            colorString = "Yellow";
+        } else {
+            colorString = "Unknown";
+        }
+        motor->Set(speed);
+        frc::Color lastColour = kUnknownTarget;
+        if (initColor == kBlueTarget){
+            colorString = "Blue";
+            if(kGreenTarget == matchedColor){
+                i++;
+                printf("Color: %i", i);
+            }
+        }else if (initColor == kYellowTarget){
+            motor->Set(0);
+            colorString = "Yellow";
+            if(kYellowTarget == matchedColor){
+                i++;
+                printf("Color: %i", i);
+            }
+        }else if (initColor == kGreenTarget){
+            colorString = "Green";
+            if(kGreenTarget == matchedColor){
+                i++;
+                printf("Color: %i", i);
+            }
+        }else if (initColor == kRedTarget){
+            colorString = "Red";
+            if(kRedTarget == matchedColor){
+                i++;
+                printf("Color: %i", i); 
+            }
+        }
+        
+         //The following lines put in SmartDashboard/Suffleboard The String for the actual colour under sensor. NOT THE ONE THAT IS BEING SENSED BY FRC.
+        frc::SmartDashboard::PutNumber("Red", detectedColor.red);
+        frc::SmartDashboard::PutNumber("Green", detectedColor.green);
+        frc::SmartDashboard::PutNumber("Blue", detectedColor.blue);
+        frc::SmartDashboard::PutNumber("Confidence", confidence);
+        frc::SmartDashboard::PutString("Detected Color", colorString);
+        */}
+
+        void colourF(){
+            if(spinned){
+                detectColour();
+            }else{
+                spin();
+            }
+        }
+    

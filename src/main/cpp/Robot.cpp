@@ -27,7 +27,7 @@ void Robot::RobotInit() {
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
   declaration();
-  
+  //checkInitialColour();
 }
 
 /**
@@ -40,7 +40,7 @@ void Robot::RobotInit() {
  */
 void Robot::RobotPeriodic() {
   humani->update();
-  detectColour();  
+  colourF();
 }
 
 /**
