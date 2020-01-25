@@ -21,11 +21,6 @@
 Robot::Robot(){
   humani = new input();
 }
-
-
-
-
-
   
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
