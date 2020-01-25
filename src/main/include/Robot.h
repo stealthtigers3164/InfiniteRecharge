@@ -12,11 +12,8 @@
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
 
-<<<<<<< HEAD
 #include <input.h>
-=======
 #include <frc/Spark.h>
->>>>>>> duarteh
 
 class Robot : public frc::TimedRobot {
  public:

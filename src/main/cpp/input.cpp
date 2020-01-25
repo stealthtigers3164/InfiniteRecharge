@@ -2,6 +2,7 @@
 #include <limelight.h>
 #include <drive.h>
 #include <Gamepad.h>
+#include <math.h>
 
 //constructor
 input::input(){
@@ -24,20 +25,26 @@ void input::update(){
     //printf("Right Joystick\n\nX:%f\nY:%f\n\n", RightStick[0], RightStick[1]);
 
     //limelight alignment set to A button
-    if (controller->ButtonA()){
+    if (controller->ButtonX()){
         float adjustment = aligner->update();
         //left and right are the Y axis (joyVector[1])
-        float left = LeftStick[1] + adjustment;
-        float right = RightStick[1] - adjustment;
+        //square for non-linear curve (smoother acceleration)
+        float left = std::pow(LeftStick[1], 2) + adjustment;
+        float right = std::pow(RightStick[1], 2) - adjustment;
         //reversed right motors
         right *= -1.0f;
         drivechain->update(left, right);
     } else {
         //left and right are the Y axis (joyVector[1])
-        float left = LeftStick[1];
-        float right = RightStick[1];
+        //square for non-linear curve (smoother acceleration)
+        float left = std::pow(LeftStick[1], 2);
+        float right = std::pow(RightStick[1], 2);
         //reversed right motors
         right *= -1.0f;
         drivechain->update(left, right);
     }
+
+    /*if(controller->ButtonA()){
+        
+    }*/
 }
