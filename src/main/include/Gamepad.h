@@ -131,6 +131,7 @@ class Gamepad{
             START,
             bLJOY,
             bRJOY,
+            NONE
         };
 
     private:
