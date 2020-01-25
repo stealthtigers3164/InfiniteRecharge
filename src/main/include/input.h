@@ -16,11 +16,18 @@ class input{
 
         input();
         void update();
+        
+        //generic function -- ignore
+        bool foo();
 
     private:
 
-        Gamepad *controller;
+        Gamepad *controllerOne;
+        Gamepad *controllerTwo;
         limelight *aligner;
         drive *drivechain;
+
+        
+        bool (*lime)();
 
 };

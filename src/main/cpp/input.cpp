@@ -9,23 +9,67 @@ input::input(){
     //possibly add second gamepad
     //pick control scheme through smartdashboard??
     //one/two controllers -> choose through smartdashboard??
-    controller = new Gamepad(0);
+    controllerOne = new Gamepad(0);
+    controllerTwo = new Gamepad(1);
     aligner = new limelight();
     //ports may change with comp. robot
     //BL, FL, FR, BR
     drivechain = new drive(3, 2, 1, 0);
 }
 
+bool input::foo(){
+    return true;
+}
+
+bool (input::*lime)(){ input::foo };
+
+void assignButton(bool (*func)(), Gamepad::controller button, Gamepad *controller){
+    switch (button){
+        case Gamepad::controller::A:
+            func = controller->ButtonA;
+            break;
+        case Gamepad::controller::B:
+            func = controller->ButtonB;
+            break;
+        case Gamepad::controller::X:
+            func = controller->ButtonX;
+            break;
+        case Gamepad::controller::Y:
+            func = controller->ButtonY;
+            break;
+        case Gamepad::controller::LBUMPER:
+            func = controller->LeftBumper;
+            break;
+        case Gamepad::controller::RBUMPER:
+            func = controller->RightBumper;
+            break;
+        case Gamepad::controller::BACK:
+            func = controller->ButtonBack;
+            break;
+        case Gamepad::controller::START:
+            func = controller->ButtonBack;
+            break;
+        case Gamepad::controller::bLJOY:
+            func = controller->ButtonLeftJoy;
+            break;
+        case Gamepad::controller::bRJOY:
+            func = controller->ButtonRightJoy;
+            break;
+        default:
+            break;
+    }
+}
+
 void input::update(){
     
-    float* LeftStick = controller->LeftJoystick();
-    float* RightStick = controller->RightJoystick();
+    float* LeftStick = controllerOne->LeftJoystick();
+    float* RightStick = controllerOne->RightJoystick();
     //uncomment statements below to print joystick values to riolog
     //printf("Left Joystick\n\nX:%f\nY:%f\n\n", LeftStick[0], LeftStick[1]);
     //printf("Right Joystick\n\nX:%f\nY:%f\n\n", RightStick[0], RightStick[1]);
 
     //limelight alignment set to A button
-    if (controller->ButtonX()){
+    if (controllerOne->ButtonX()){
         float adjustment = aligner->update();
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)

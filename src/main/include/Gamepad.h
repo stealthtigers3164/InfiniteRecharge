@@ -119,7 +119,20 @@ class Gamepad{
             //axes[1] = {vecx, vecy};
             return DPadAxes;
         }
-    
+
+        enum controller{
+            A,
+            B,
+            X,
+            Y,
+            LBUMPER,
+            RBUMPER,
+            BACK,
+            START,
+            bLJOY,
+            bRJOY,
+        };
+
     private:
 
         const double PI = 3.14159265;
