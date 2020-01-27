@@ -141,6 +141,8 @@
 
     bool spinned = false;
 
+    
+
     void colourF(){
        if(spinned){
             detectColour();
