@@ -140,8 +140,10 @@
     }
 
     bool spinned = false;
-
     
+    void sspin(){
+
+    }
 
     void colourF(){
        if(spinned){
