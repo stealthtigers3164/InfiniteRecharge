@@ -48,9 +48,65 @@
   
     
 
-    double speed = 0.25;
+    double speed = 0.27;
     //The method/function spin should not be enabled at the same time that detectColour is.
 
+    //
+   
+    int colours[5] = {0, 1, 2, 3};
+    int actual = 4;
+    int prev = 4;
+    int initial = 0;
+    int total = 0;
+    void spin(){
+        if(actual != 4 && prev != 4){
+                frc::Color detectedColor = m_colorSensor.GetColor();
+                std::string colorString;
+                double confidence = 0.0;
+                frc::Color matchedColor = m_colorMatcher.MatchClosestColor(detectedColor, confidence);
+                motor->Set(speed);
+            if(matchedColor == kRedTarget){
+                if(actual != prev){
+                    actual = 0;
+                    prev = 0;
+                }else{
+                    actual = 0;
+                }
+            }else if(matchedColor == kGreenTarget){
+                if(actual != prev){
+                    actual = 1;
+                    prev = 1;
+                }else{
+                    actual = 1;
+                }
+            }else if(matchedColor == kBlueTarget){
+                if(actual != prev){
+                    actual = 2;
+                    prev = 2;
+                }else{
+                    actual = 2;
+                }
+            }else if(matchedColor == kYellowTarget){
+                if(actual != prev){
+                    actual = 3;
+                    prev = 3;
+                }else{
+                    actual = 3;
+                }
+            }
+        }
+        if(total == 0){
+            motor->Set(speed);
+            initial = actual;
+        }else if(total < 8){
+            if(actual == prev){
+                motor->Set(speed);
+            }else{
+                motor->Set(0);
+                total++;
+            }
+        }
+    }
 
     //Repeated during Periodic
      void detectColour(){
@@ -139,17 +195,5 @@
         frc::SmartDashboard::PutString("Detected Color", colorString);
     }
 
-    bool spinned = false;
-    
-    void sspin(){
 
-    }
-
-    void colourF(){
-       if(spinned){
-            detectColour();
-        }else{
-            //else
-        }
-    }
     
