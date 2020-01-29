@@ -13,6 +13,7 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/Joystick.h>
 #include <frc/smartdashboard/smartdashboard.h>
+#include <Gamepad.h>
 
 #include "Robot.h"
 #include "rev/ColorSensorV3.h"
@@ -48,66 +49,58 @@
   
     
 
-    double speed = 0.27;
+    double speed = 0.28;
+
+    int readColour(){
+        frc::Color detectedColor = m_colorSensor.GetColor();
+        std::string colorString;
+        double confidence = 0.0;
+        frc::Color matchedColor = m_colorMatcher.MatchClosestColor(detectedColor, confidence);
+        if (matchedColor == kBlueTarget) {
+            colorString = "Blue";
+            return(0);
+        } else if (matchedColor == kRedTarget) {
+            colorString = "Red";
+            return(2);
+        } else if (matchedColor == kGreenTarget) {
+            colorString = "Green";
+            return(1);
+        }
+        else if (matchedColor == kYellowTarget) {
+            colorString = "Yellow";
+            return(3);
+        } else {
+            colorString = "Unknown";
+        }
+        frc::SmartDashboard::PutNumber("Red", detectedColor.red);
+        frc::SmartDashboard::PutNumber("Green", detectedColor.green);
+        frc::SmartDashboard::PutNumber("Blue", detectedColor.blue);
+        frc::SmartDashboard::PutNumber("Confidence", confidence);
+        frc::SmartDashboard::PutString("Detected Color", colorString);
+  
+    }
     //The method/function spin should not be enabled at the same time that detectColour is.
 
     //
-   
-    int colours[5] = {0, 1, 2, 3};
-    int actual = 4;
-    int prev = 4;
-    int initial = 0;
-    int total = 0;
+    
+        int targetColour = 0;
+        int previousColour = 0;
+        int currentColour = 0;
+        int rotationCount = 0;
+        int numberOfRotation = 37;
     void spin(){
-        if(actual != 4 && prev != 4){
-                frc::Color detectedColor = m_colorSensor.GetColor();
-                std::string colorString;
-                double confidence = 0.0;
-                frc::Color matchedColor = m_colorMatcher.MatchClosestColor(detectedColor, confidence);
-                motor->Set(speed);
-            if(matchedColor == kRedTarget){
-                if(actual != prev){
-                    actual = 0;
-                    prev = 0;
-                }else{
-                    actual = 0;
-                }
-            }else if(matchedColor == kGreenTarget){
-                if(actual != prev){
-                    actual = 1;
-                    prev = 1;
-                }else{
-                    actual = 1;
-                }
-            }else if(matchedColor == kBlueTarget){
-                if(actual != prev){
-                    actual = 2;
-                    prev = 2;
-                }else{
-                    actual = 2;
-                }
-            }else if(matchedColor == kYellowTarget){
-                if(actual != prev){
-                    actual = 3;
-                    prev = 3;
-                }else{
-                    actual = 3;
-                }
+        currentColour = readColour(); //replace with current colour
+        previousColour = currentColour;
+        motor->Set(speed);
+        while(rotationCount < numberOfRotation){
+            currentColour = readColour();
+            if(currentColour != previousColour){
+                rotationCount++;
             }
+            previousColour = currentColour;
         }
-        if(total == 0){
-            motor->Set(speed);
-            initial = actual;
-        }else if(total < 8){
-            if(actual == prev){
-                motor->Set(speed);
-            }else{
-                motor->Set(0);
-                total++;
-            }
-        }
+        motor->SetSpeed(0);
     }
-
     //Repeated during Periodic
      void detectColour(){
         frc::Color detectedColor = m_colorSensor.GetColor();
@@ -194,6 +187,21 @@
         frc::SmartDashboard::PutNumber("Confidence", confidence);
         frc::SmartDashboard::PutString("Detected Color", colorString);
     }
-
-
-    
+    void colourWheel(){
+        /*if(Gamepad -> ButtonX){
+            targetColour = 0;
+            previousColour = 0;
+            currentColour = 0;
+            rotationCount = 0;
+            numberOfRotation = 37;
+            targetBlue = true;
+            targetGreen = false;
+            targetRed = false;
+            targetYellow = false;
+        }*/
+        if(rotationCount < numberOfRotation){
+            spin();
+        }else{
+            detectColour();
+        }
+    }

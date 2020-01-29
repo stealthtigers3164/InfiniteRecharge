@@ -40,7 +40,7 @@ void Robot::RobotInit() {
  */
 void Robot::RobotPeriodic() {
   humani->update();
-  spin();
+  colourWheel();
 }
 
 /**
