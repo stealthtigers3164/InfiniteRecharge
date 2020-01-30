@@ -7,7 +7,7 @@
 input::input(){
     controller = new Gamepad(0);
     aligner = new limelight();
-    drivechain = new drive(3, 2, 1, 0);
+    drivechain = new drive(1, 2, 3, 0);
 }
 
 void input::update(){
