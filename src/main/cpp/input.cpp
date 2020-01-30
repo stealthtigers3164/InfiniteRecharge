@@ -22,13 +22,13 @@ void input::update(){
         float adjustment = aligner->update();
         float left = LeftStick[1] + adjustment;
         float right = RightStick[1] - adjustment;
-        //reversed right motors
+        //reversed right motors -- may need to change
         right *= -1.0f;
         drivechain->update(left, right);
     } else {
         float left = LeftStick[1];
         float right = RightStick[1];
-        //reversed right motors
+        //reversed right motors -- may need to change
         right *= -1.0f;
         drivechain->update(left, right);
     }
