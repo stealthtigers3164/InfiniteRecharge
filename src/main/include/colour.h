@@ -30,7 +30,7 @@
     static constexpr frc::Color kRedTarget = frc::Color(0.561, 0.232, 0.114);
     static constexpr frc::Color kYellowTarget = frc::Color(0.361, 0.524, 0.113);
     static constexpr frc::Color kUnknownTarget = frc::Color(0.0000, 0.0000, 0.0000);
-    frc::Spark *motor = new frc::Spark(5); 
+    frc::Spark *motor = new frc::Spark(5);
     //The following 4 lines are the booleans that are activated with the switch break
     bool targetGreen = false;
     bool targetRed = false;
@@ -187,8 +187,14 @@
         frc::SmartDashboard::PutNumber("Confidence", confidence);
         frc::SmartDashboard::PutString("Detected Color", colorString);
     }
+    bool act = false;
     void colourWheel(){
-        /*if(Gamepad -> ButtonX){
+        if(){
+            if(act){
+                act = false;
+            }else{
+                act = true;
+            }
             targetColour = 0;
             previousColour = 0;
             currentColour = 0;
@@ -198,10 +204,14 @@
             targetGreen = false;
             targetRed = false;
             targetYellow = false;
-        }*/
+        }
+
+        if(act){
         if(rotationCount < numberOfRotation){
             spin();
         }else{
             detectColour();
+        }
+        
         }
     }
