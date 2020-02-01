@@ -13,6 +13,7 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/Joystick.h>
 #include <frc/smartdashboard/smartdashboard.h>
+#include <Gamepad.h>
 
 #include "Robot.h"
 #include "rev/ColorSensorV3.h"
@@ -28,7 +29,8 @@
     static constexpr frc::Color kGreenTarget = frc::Color(0.197, 0.561, 0.240);
     static constexpr frc::Color kRedTarget = frc::Color(0.561, 0.232, 0.114);
     static constexpr frc::Color kYellowTarget = frc::Color(0.361, 0.524, 0.113);
-    frc::Spark *motor = new frc::Spark(5); 
+    static constexpr frc::Color kUnknownTarget = frc::Color(0.0000, 0.0000, 0.0000);
+    frc::Spark *motor = new frc::Spark(5);
     //The following 4 lines are the booleans that are activated with the switch break
     bool targetGreen = false;
     bool targetRed = false;
@@ -45,12 +47,62 @@
         frc::SmartDashboard::PutNumber("Colour", 0);
     }   
   
-
-
-    double speed = 0.26;
     
+
+    double speed = 0.28;
+
+    int readColour(){
+        frc::Color detectedColor = m_colorSensor.GetColor();
+        std::string colorString;
+        double confidence = 0.0;
+        frc::Color matchedColor = m_colorMatcher.MatchClosestColor(detectedColor, confidence);
+        if (matchedColor == kBlueTarget) {
+            colorString = "Blue";
+            return(0);
+        } else if (matchedColor == kRedTarget) {
+            colorString = "Red";
+            return(2);
+        } else if (matchedColor == kGreenTarget) {
+            colorString = "Green";
+            return(1);
+        }
+        else if (matchedColor == kYellowTarget) {
+            colorString = "Yellow";
+            return(3);
+        } else {
+            colorString = "Unknown";
+        }
+        frc::SmartDashboard::PutNumber("Red", detectedColor.red);
+        frc::SmartDashboard::PutNumber("Green", detectedColor.green);
+        frc::SmartDashboard::PutNumber("Blue", detectedColor.blue);
+        frc::SmartDashboard::PutNumber("Confidence", confidence);
+        frc::SmartDashboard::PutString("Detected Color", colorString);
+  
+    }
+    //The method/function spin should not be enabled at the same time that detectColour is.
+
+    //
+    
+        int targetColour = 0;
+        int previousColour = 0;
+        int currentColour = 0;
+        int rotationCount = 0;
+        int numberOfRotation = 37;
+    void spin(){
+        currentColour = readColour(); //replace with current colour
+        previousColour = currentColour;
+        motor->Set(speed);
+        while(rotationCount < numberOfRotation){
+            currentColour = readColour();
+            if(currentColour != previousColour){
+                rotationCount++;
+            }
+            previousColour = currentColour;
+        }
+        motor->SetSpeed(0);
+    }
     //Repeated during Periodic
-    void detectColour(){
+     void detectColour(){
         frc::Color detectedColor = m_colorSensor.GetColor();
         std::string colorString;
         double confidence = 0.0;
@@ -105,7 +157,7 @@
             
         } else if (matchedColor == kRedTarget) {
             colorString = "Red";
-           if(targetRed){
+            if(targetRed){
                motor->Set(0);
             }else{
                 motor->Set(speed);
@@ -134,4 +186,32 @@
         frc::SmartDashboard::PutNumber("Blue", detectedColor.blue);
         frc::SmartDashboard::PutNumber("Confidence", confidence);
         frc::SmartDashboard::PutString("Detected Color", colorString);
+    }
+    bool act = false;
+    void colourWheel(){
+        if(){
+            if(act){
+                act = false;
+            }else{
+                act = true;
+            }
+            targetColour = 0;
+            previousColour = 0;
+            currentColour = 0;
+            rotationCount = 0;
+            numberOfRotation = 37;
+            targetBlue = true;
+            targetGreen = false;
+            targetRed = false;
+            targetYellow = false;
+        }
+
+        if(act){
+        if(rotationCount < numberOfRotation){
+            spin();
+        }else{
+            detectColour();
+        }
+        
+        }
     }
