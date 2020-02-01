@@ -2,6 +2,7 @@
 #include <Gamepad.h>
 #include <limelight.h>
 #include <drive.h>
+#include <color.h>
 
 //input class
 //detects input from controllers using the gamepad wrapper
@@ -26,7 +27,7 @@ class input{
         Gamepad *controllerTwo;
         limelight *aligner;
         drive *drivechain;
-
+        color *cspinner;
         
         bool (*lime)();
 
