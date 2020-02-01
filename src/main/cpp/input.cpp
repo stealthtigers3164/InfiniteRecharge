@@ -23,21 +23,22 @@ input::input(){
     cspinner = new color();
 }
 
+bool xButton = false;
 void input::update(){
     
     float* LeftStick = controllerOne->LeftJoystick();
     float* RightStick = controllerOne->RightJoystick();
     //uncomment statements below to print joystick values to riolog
-    //printf("Left Joystick\n\nX:%f\nY:%f\n\n", LeftStick[0], LeftStick[1]);
-    //printf("Right Joystick\n\nX:%f\nY:%f\n\n", RightStick[0], RightStick[1]);
+    printf("Left Joystick\n\nX:%f\nY:%f\n\n", LeftStick[0], LeftStick[1]);
+    printf("Right Joystick\n\nX:%f\nY:%f\n\n", RightStick[0], RightStick[1]);
 
     //limelight alignment set to A button
     if (controllerOne->ButtonA()){
         float adjustment = aligner->update();
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)
-        float left = std::pow(LeftStick[1], 2) + adjustment;
-        float right = std::pow(RightStick[1], 2) - adjustment;
+        float left = ((std::abs(LeftStick[1])/LeftStick[1]) * std::pow(LeftStick[1], 2)) + adjustment;
+        float right = ((std::abs(RightStick[1])/RightStick[1]) * std::pow(RightStick[1], 2)) - adjustment;
         //motors flipped
         // GOL:         left *= -1;
         // Winchless:   right *= -1;
@@ -46,15 +47,15 @@ void input::update(){
     } else {
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)
-        float left = std::pow(LeftStick[1], 2);
-        float right = std::pow(RightStick[1], 2);
+        float left = (std::abs(LeftStick[1])/LeftStick[1]) * std::pow(LeftStick[1], 2);
+        float right = (std::abs(RightStick[1])/RightStick[1]) * std::pow(RightStick[1], 2);
         //motors flipped
         // GOL:         left *= -1;
         // Winchless:   right *= -1;
         right *= -1;
         drivechain->update(left, right);
     }
-
+    
     if (controllerOne->ButtonX()){
         cspinner->spin();
     }
