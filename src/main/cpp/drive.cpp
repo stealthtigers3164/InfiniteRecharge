@@ -18,8 +18,8 @@ drive::drive(int backLeft, int frontLeft, int frontRight, int backRight){
 }
 
 int drive::update(float left, float right){
-    m_frontLeft->Set(left);
-    m_frontRight->Set(right);
-    m_backLeft->Set(left);
-    m_backRight->Set(right);
+    m_frontLeft->SetSpeed(left);
+    m_frontRight->SetSpeed(right);
+    m_backLeft->SetSpeed(left);
+    m_backRight->SetSpeed(right);
 }
