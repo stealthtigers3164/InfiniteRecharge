@@ -14,7 +14,7 @@ input::input(){
     aligner = new limelight();
     //ports may change with comp. robot
     //BL, FL, FR, BR
-    drivechain = new drive(3, 2, 1, 0);
+    drivechain = new drive(1, 2, 3, 0);
 }
 
 bool input::foo(){
