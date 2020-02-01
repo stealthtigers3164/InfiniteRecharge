@@ -17,9 +17,6 @@ class input{
 
         input();
         void update();
-        
-        //generic function -- ignore
-        bool foo();
 
     private:
 
@@ -28,7 +25,5 @@ class input{
         limelight *aligner;
         drive *drivechain;
         color *cspinner;
-        
-        bool (*lime)();
 
 };

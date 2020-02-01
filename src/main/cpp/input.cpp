@@ -21,49 +21,6 @@ input::input(){
     cspinner = new color();
 }
 
-bool input::foo(){
-    return true;
-}
-
-bool (input::*lime)(){ input::foo };
-
-void assignButton(bool (*func)(), Gamepad::controller button, Gamepad *controller){
-    switch (button){
-        case Gamepad::controller::A:
-            func = controller->ButtonA;
-            break;
-        case Gamepad::controller::B:
-            func = controller->ButtonB;
-            break;
-        case Gamepad::controller::X:
-            func = controller->ButtonX;
-            break;
-        case Gamepad::controller::Y:
-            func = controller->ButtonY;
-            break;
-        case Gamepad::controller::LBUMPER:
-            func = controller->LeftBumper;
-            break;
-        case Gamepad::controller::RBUMPER:
-            func = controller->RightBumper;
-            break;
-        case Gamepad::controller::BACK:
-            func = controller->ButtonBack;
-            break;
-        case Gamepad::controller::START:
-            func = controller->ButtonBack;
-            break;
-        case Gamepad::controller::bLJOY:
-            func = controller->ButtonLeftJoy;
-            break;
-        case Gamepad::controller::bRJOY:
-            func = controller->ButtonRightJoy;
-            break;
-        default:
-            break;
-    }
-}
-
 void input::update(){
     
     float* LeftStick = controllerOne->LeftJoystick();
