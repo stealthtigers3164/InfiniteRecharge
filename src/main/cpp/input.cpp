@@ -4,6 +4,7 @@
 #include <color.h>
 #include <Gamepad.h>
 #include <math.h>
+#include <iostream>
 
 //constructor
 input::input(){
@@ -29,8 +30,8 @@ void input::update(){
     float* LeftStick = controllerOne->LeftJoystick();
     float* RightStick = controllerOne->RightJoystick();
     //uncomment statements below to print joystick values to riolog
-    printf("Left Joystick\n\nX:%f\nY:%f\n\n", LeftStick[0], LeftStick[1]);
-    printf("Right Joystick\n\nX:%f\nY:%f\n\n", RightStick[0], RightStick[1]);
+    //printf("Left Joystick\n\nX:%f\nY:%f\n\n", LeftStick[0], LeftStick[1]);
+    //printf("Right Joystick\n\nX:%f\nY:%f\n\n", RightStick[0], RightStick[1]);
 
     //limelight alignment set to A button
     if (controllerOne->ButtonA()){

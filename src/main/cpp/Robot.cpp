@@ -13,15 +13,22 @@
 
 #include <input.h>
 
+#include "cameraserver/CameraServer.h"
+
+
 
 Robot::Robot(){
   humani = new input();
 }
-  
+
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+  // Creates UsbCamera and MjpegServer [1] and connects them
+  frc::CameraServer::GetInstance()->StartAutomaticCapture();
+  // Creates the CvSink and connects it to the UsbCamera
+  cs::CvSink cvSink = frc::CameraServer::GetInstance()->GetVideo();
 }
 
 /**
