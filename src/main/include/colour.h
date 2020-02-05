@@ -19,7 +19,7 @@
 #include "rev/ColorSensorV3.h"
 #include "rev/ColorMatch.h"
 #include <frc/DriverStation.h>
-
+#include <varG.h>
 
     static constexpr auto i2cPort = frc::I2C::Port::kOnboard;
     rev::ColorSensorV3 m_colorSensor{i2cPort};
@@ -187,8 +187,8 @@
         frc::SmartDashboard::PutNumber("Confidence", confidence);
         frc::SmartDashboard::PutString("Detected Color", colorString);
     }
-    void colourWheel(){
-        /*if(Gamepad -> ButtonX){
+extern bool buttonAWPP; 
+    void buttonCheck(){
             targetColour = 0;
             previousColour = 0;
             currentColour = 0;
@@ -198,10 +198,14 @@
             targetGreen = false;
             targetRed = false;
             targetYellow = false;
-        }*/
-        if(rotationCount < numberOfRotation){
+            buttonAWPP = true;
+    }
+    void colourWheel(){
+        if(buttonAWPP == true ){
+        if( rotationCount < numberOfRotation){
             spin();
         }else{
             detectColour();
+        }
         }
     }
