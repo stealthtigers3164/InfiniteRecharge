@@ -1,37 +1,78 @@
 #include <input.h>
 #include <limelight.h>
 #include <drive.h>
+<<<<<<< HEAD
 #include <varG.h>
 #include <Gamepad.h>
+=======
+#include <color.h>
+#include <Gamepad.h>
+#include <math.h>
+#include <iostream>
+
+>>>>>>> alex
 //constructor
 input::input(){
-    controller = new Gamepad(0);
+    //possibly add second gamepad
+    //pick control scheme through smartdashboard??
+    //one/two controllers -> choose through smartdashboard??
+    controllerOne = new Gamepad(0);
+    controllerTwo = new Gamepad(1);
+    //limelight code
     aligner = new limelight();
-    drivechain = new drive(3, 2, 1, 0);
+    //ports may change with comp. robot
+    //BL, FL, FR, BR
+    // GOL:                6, 7, 9, 8
+    // Winchless:          1, 2, 3, 0
+    drivechain = new drive(1, 2, 3, 0);
+    //color sensor
+    cspinner = new color();
 }
+<<<<<<< HEAD
 extern bool buttonAWPP; 
+=======
+
+bool xButton = false;
+>>>>>>> alex
 void input::update(){
     
-    float* LeftStick = controller->LeftJoystick();
-    float* RightStick = controller->RightJoystick();
+    float* LeftStick = controllerOne->LeftJoystick();
+    float* RightStick = controllerOne->RightJoystick();
+    //uncomment statements below to print joystick values to riolog
     //printf("Left Joystick\n\nX:%f\nY:%f\n\n", LeftStick[0], LeftStick[1]);
     //printf("Right Joystick\n\nX:%f\nY:%f\n\n", RightStick[0], RightStick[1]);
 
     //limelight alignment set to A button
-    if (controller->ButtonA()){
+    if (controllerOne->ButtonA()){
         float adjustment = aligner->update();
+<<<<<<< HEAD
         float left = LeftStick[1] - adjustment;
         float right = RightStick[1] + adjustment;
         //reversed right motors
         right *= -1.0f;
+=======
+        //left and right are the Y axis (joyVector[1])
+        //square for non-linear curve (smoother acceleration)
+        float left = ((std::abs(LeftStick[1])/LeftStick[1]) * std::pow(LeftStick[1], 2)) + adjustment;
+        float right = ((std::abs(RightStick[1])/RightStick[1]) * std::pow(RightStick[1], 2)) - adjustment;
+        //motors flipped
+        // GOL:         left *= -1;
+        // Winchless:   right *= -1;
+        right *= -1;
+>>>>>>> alex
         drivechain->update(left, right);
     } else {
-        float left = LeftStick[1];
-        float right = RightStick[1];
-        //reversed right motors
-        right *= -1.0f;
+        //left and right are the Y axis (joyVector[1])
+        //square for non-linear curve (smoother acceleration)
+        float left = (std::abs(LeftStick[1])/LeftStick[1]) * std::pow(LeftStick[1], 2);
+        float right = (std::abs(RightStick[1])/RightStick[1]) * std::pow(RightStick[1], 2);
+        //motors flipped
+        // GOL:         left *= -1;
+        // Winchless:   right *= -1;
+        right *= -1;
         drivechain->update(left, right);
     }
+<<<<<<< HEAD
     /*if (controller->ButtonX()){
         //cspinner->spin();
         //buttonCheck(true);
@@ -43,4 +84,23 @@ void input::update(){
     /*if (controller->ButtonX()){
         cspinner->matchColor();
     }*/
+=======
+    
+    if (controllerOne->ButtonX()){
+        cspinner->spin();
+    }
+    if (controllerOne->ButtonX()){
+        cspinner->matchColor();
+    }
+
+    //pseudo code
+    /*
+    if (button down){
+        spin flywheel;
+        if (flywheel up to speed -- read shooter encoder){
+            iterate indexer to shoot ball
+        }
+    }
+    */
+>>>>>>> alex
 }

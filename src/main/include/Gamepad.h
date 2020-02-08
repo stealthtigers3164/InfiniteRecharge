@@ -119,7 +119,58 @@ class Gamepad{
             //axes[1] = {vecx, vecy};
             return DPadAxes;
         }
-    
+
+        enum controller{
+            A,
+            B,
+            X,
+            Y,
+            LBUMPER,
+            RBUMPER,
+            BACK,
+            START,
+            bLJOY,
+            bRJOY,
+            NONE
+        };
+
+        bool button(controller button, Gamepad *gpad){
+            switch (button){
+                case controller::A:
+                    return gpad->ButtonA();
+                    break;
+                case controller::B:
+                    return gpad->ButtonB();
+                    break;
+                case controller::X:
+                   return gpad->ButtonX();
+                    break;
+                case controller::Y:
+                    return gpad->ButtonY();
+                    break;
+                case controller::LBUMPER:
+                    return gpad->LeftBumper();
+                    break;
+                case controller::RBUMPER:
+                    return gpad->RightBumper();
+                    break;
+                case controller::BACK:
+                    return gpad->ButtonBack();
+                    break;
+                case controller::START:
+                    return gpad->ButtonStart();
+                    break;
+                case controller::bLJOY:
+                    return gpad->ButtonLeftJoy();
+                    break;
+                case controller::bRJOY:
+                    return gpad->ButtonRightJoy();
+                    break;
+                default:
+                    break;
+            }
+        }
+
     private:
 
         const double PI = 3.14159265;

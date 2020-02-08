@@ -1,57 +1,62 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 #pragma once
 
 #include <string>
-
+#include <frc/Spark.h>
 #include <frc/TimedRobot.h>
-#include <frc/smartdashboard/SendableChooser.h>
-#include <frc/Joystick.h>
-#include <frc/smartdashboard/smartdashboard.h>
-#include <Gamepad.h>
-
-#include "Robot.h"
-#include "rev/ColorSensorV3.h"
-#include "rev/ColorMatch.h"
+#include <frc/smartdashboard/SmartDashboard.h>
 #include <frc/DriverStation.h>
+<<<<<<< HEAD:src/main/include/colour.h
 #include <varG.h>
+=======
+#include <rev/ColorSensorV3.h>
+#include <rev/ColorMatch.h>
 
-    static constexpr auto i2cPort = frc::I2C::Port::kOnboard;
-    rev::ColorSensorV3 m_colorSensor{i2cPort};
-    rev::ColorMatch m_colorMatcher;
-    //The following 4 lines are for colour calibration
-    static constexpr frc::Color kBlueTarget = frc::Color(0.143, 0.427, 0.429);
-    static constexpr frc::Color kGreenTarget = frc::Color(0.197, 0.561, 0.240);
-    static constexpr frc::Color kRedTarget = frc::Color(0.561, 0.232, 0.114);
-    static constexpr frc::Color kYellowTarget = frc::Color(0.361, 0.524, 0.113);
-    static constexpr frc::Color kUnknownTarget = frc::Color(0.0000, 0.0000, 0.0000);
-    frc::Spark *motor = new frc::Spark(5); 
-    //The following 4 lines are the booleans that are activated with the switch break
-    bool targetGreen = false;
-    bool targetRed = false;
-    bool targetBlue = false;
-    bool targetYellow = false;
-    std::string gameData;
-   
-   //It will be ran only once
+class color{
+>>>>>>> alex:src/main/include/color.h
+
+    public:
+
+        color();
+        void readColor();
+        void spin();
+        void matchColor();
+
+    private:
+        static constexpr auto i2cPort = frc::I2C::Port::kOnboard;
+        rev::ColorSensorV3 m_colorSensor{i2cPort};
+        rev::ColorMatch m_colorMatcher;
+        //The following 4 lines are for color calibration
+        static constexpr frc::Color kBlueTarget = frc::Color(0.143, 0.427, 0.429);
+        static constexpr frc::Color kGreenTarget = frc::Color(0.197, 0.561, 0.240);
+        static constexpr frc::Color kRedTarget = frc::Color(0.561, 0.232, 0.114);
+        static constexpr frc::Color kYellowTarget = frc::Color(0.361, 0.524, 0.113);
+        static constexpr frc::Color kUnknownTarget = frc::Color(0.0000, 0.0000, 0.0000);
+        //color match variables
+        frc::Color detectedColor;
+        frc::Color matchedColor;
+        //data sent from field -- which color to match to
+        std::string gameData;
+        //current color initiation -- allows readColor() to be void
+        int currentColor;
+        //motor
+        frc::Spark *motor;
+        //speed -- stays constant
+        static constexpr double speed = 0.28;
+};
+    //It will be ran only once -- make constructor
+    //deprecated
+    /*
     void declaration(){
         m_colorMatcher.AddColorMatch(kBlueTarget);
         m_colorMatcher.AddColorMatch(kGreenTarget);
         m_colorMatcher.AddColorMatch(kRedTarget);
         m_colorMatcher.AddColorMatch(kYellowTarget);
-        frc::SmartDashboard::PutNumber("Colour", 0);
-    }   
-  
-    
+        frc::SmartDashboard::PutNumber("Color", 0);
+    }
+    */
 
-    double speed = 0.28;
-
-    int readColour(){
+//deprecated
+/*     int readColor(){
         frc::Color detectedColor = m_colorSensor.GetColor();
         std::string colorString;
         double confidence = 0.0;
@@ -79,31 +84,37 @@
         frc::SmartDashboard::PutNumber("Confidence", confidence);
         frc::SmartDashboard::PutString("Detected Color", colorString);
   
-    }
-    //The method/function spin should not be enabled at the same time that detectColour is.
+    } */
+
+
+    //The method/function spin should not be enabled at the same time that detectColor is.
 
     //
     
-        int targetColour = 0;
-        int previousColour = 0;
-        int currentColour = 0;
+    //deprecated
+/*         int targetColor = 0;
+        int previousColor = 0;
+        int currentColor = 0;
         int rotationCount = 0;
         int numberOfRotation = 37;
     void spin(){
-        currentColour = readColour(); //replace with current colour
-        previousColour = currentColour;
+        currentColor = readColor(); //replace with current color
+        previousColor = currentColor;
         motor->Set(speed);
         while(rotationCount < numberOfRotation){
-            currentColour = readColour();
-            if(currentColour != previousColour){
+            currentColor = readColor();
+            if(currentColor != previousColor){
                 rotationCount++;
             }
-            previousColour = currentColour;
+            previousColor = currentColor;
         }
         motor->SetSpeed(0);
-    }
+    } */
+
+//deprecated
+/* 
     //Repeated during Periodic
-     void detectColour(){
+    void detectColor(){
         frc::Color detectedColor = m_colorSensor.GetColor();
         std::string colorString;
         double confidence = 0.0;
@@ -147,7 +158,7 @@
             targetRed = false;
             targetYellow = false;
         }
-        //these if-else statements check target + the matched colour and decides whether to rotate or not.
+        //these if-else statements check target + the matched color and decides whether to rotate or not.
         if (matchedColor == kBlueTarget) {
             colorString = "Blue";
             if(targetBlue){
@@ -181,32 +192,62 @@
         } else {
             colorString = "Unknown";
         }
-        //The following lines put in SmartDashboard/Suffleboard The String for the actual colour under sensor. NOT THE ONE THAT IS BEING SENSED BY FRC.
+        //The following lines put in SmartDashboard/Suffleboard The String for the actual color under sensor. NOT THE ONE THAT IS BEING SENSED BY FRC.
         frc::SmartDashboard::PutNumber("Red", detectedColor.red);
         frc::SmartDashboard::PutNumber("Green", detectedColor.green);
         frc::SmartDashboard::PutNumber("Blue", detectedColor.blue);
         frc::SmartDashboard::PutNumber("Confidence", confidence);
         frc::SmartDashboard::PutString("Detected Color", colorString);
+<<<<<<< HEAD:src/main/include/colour.h
     }
 extern bool buttonAWPP; 
     void buttonCheck(){
             targetColour = 0;
             previousColour = 0;
             currentColour = 0;
+=======
+    } */
+
+//deprecated
+/*     bool act = false;
+    void colorWheel(){
+        if(){
+            if(act){
+                act = false;
+            }else{
+                act = true;
+            }
+            targetColor = 0;
+            previousColor = 0;
+            currentColor = 0;
+>>>>>>> alex:src/main/include/color.h
             rotationCount = 0;
             numberOfRotation = 37;
             targetBlue = true;
             targetGreen = false;
             targetRed = false;
             targetYellow = false;
+<<<<<<< HEAD:src/main/include/colour.h
             buttonAWPP = true;
     }
     void colourWheel(){
         if(buttonAWPP == true ){
         if( rotationCount < numberOfRotation){
+=======
+        }
+
+        if(act){
+        if(rotationCount < numberOfRotation){
+>>>>>>> alex:src/main/include/color.h
             spin();
         }else{
-            detectColour();
+            detectColor();
         }
+        
+        }
+<<<<<<< HEAD:src/main/include/colour.h
         }
     }
+=======
+    } */
+>>>>>>> alex:src/main/include/color.h

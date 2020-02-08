@@ -11,11 +11,14 @@
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
-#include <frc/util/color.h>
-
 #include <input.h>
 
+<<<<<<< HEAD
 #include <../include/colour.h>
+=======
+#include "cameraserver/CameraServer.h"
+
+>>>>>>> alex
 
 #include "cameraserver/CameraServer.h"
 
@@ -24,14 +27,18 @@
 Robot::Robot(){
   humani = new input();
 }
-  
+
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
+<<<<<<< HEAD
   declaration();
   //checkInitialColour();
    // Creates UsbCamera and MjpegServer [1] and connects them
+=======
+  // Creates UsbCamera and MjpegServer [1] and connects them
+>>>>>>> alex
   frc::CameraServer::GetInstance()->StartAutomaticCapture();
   // Creates the CvSink and connects it to the UsbCamera
   cs::CvSink cvSink = frc::CameraServer::GetInstance()->GetVideo();
@@ -47,7 +54,6 @@ void Robot::RobotInit() {
  */
 void Robot::RobotPeriodic() {
   humani->update();
-  colourWheel();
 }
 
 /**
