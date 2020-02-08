@@ -13,9 +13,12 @@ limelight::limelight(){
 
 //update table values
 float limelight::update(){
-    //update limelight valuse
-    table->GetNumber("tx", tx);
-    table->GetNumber("ty", ty);
+    //update limelight values
+     if (table == NULL) {
+            table =  nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+    }
+    double tx = table->GetNumber("tx",0.0);
+    double ty = table->GetNumber("ty",0.0);
 
     float heading_error = -tx;
     float distance_error = -ty;
@@ -31,8 +34,7 @@ float limelight::update(){
 
     //distance calculations
     float distance_adjust = KpDistance * distance_error;
-
     //return final power as output -- called only by input the file
     //input has if else that will either align or just use joystick
-    return steering_adjust + distance_adjust;
+    return (steering_adjust + distance_adjust)*0.4;
 }

@@ -15,24 +15,26 @@
 
 #include <input.h>
 
-#include <colour.h>
+#include <../include/colour.h>
+
+#include "cameraserver/CameraServer.h"
 
 
+ bool buttonAWPP = false;
 Robot::Robot(){
   humani = new input();
 }
-
-
-
-
-
   
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
   declaration();
-  
+  //checkInitialColour();
+   // Creates UsbCamera and MjpegServer [1] and connects them
+  frc::CameraServer::GetInstance()->StartAutomaticCapture();
+  // Creates the CvSink and connects it to the UsbCamera
+  cs::CvSink cvSink = frc::CameraServer::GetInstance()->GetVideo();
 }
 
 /**
@@ -45,7 +47,7 @@ void Robot::RobotInit() {
  */
 void Robot::RobotPeriodic() {
   humani->update();
-  detectColour();  
+  colourWheel();
 }
 
 /**
