@@ -63,4 +63,14 @@ void input::update(){
     if (controllerOne->ButtonX()){
         cspinner->matchColor();
     }
+
+    //pseudo code
+    /*
+    if (button down){
+        spin flywheel;
+        if (flywheel up to speed -- read shooter encoder){
+            iterate indexer to shoot ball
+        }
+    }
+    */
 }
