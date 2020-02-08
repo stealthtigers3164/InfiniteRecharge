@@ -71,6 +71,7 @@
             return(3);
         } else {
             colorString = "Unknown";
+            return -1;
         }
         frc::SmartDashboard::PutNumber("Red", detectedColor.red);
         frc::SmartDashboard::PutNumber("Green", detectedColor.green);

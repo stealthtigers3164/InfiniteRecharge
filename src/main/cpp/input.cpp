@@ -19,11 +19,9 @@ void input::update(){
 
     //limelight alignment set to A button
     if (controller->ButtonA()){
-        buttonAWPP = true;
-    }
-        /*float adjustment = aligner->update();
-        float left = LeftStick[1] + adjustment;
-        float right = RightStick[1] - adjustment;
+        float adjustment = aligner->update();
+        float left = LeftStick[1] - adjustment;
+        float right = RightStick[1] + adjustment;
         //reversed right motors
         right *= -1.0f;
         drivechain->update(left, right);
@@ -34,12 +32,15 @@ void input::update(){
         right *= -1.0f;
         drivechain->update(left, right);
     }
-    if (controller->ButtonX()){
+    /*if (controller->ButtonX()){
         //cspinner->spin();
         //buttonCheck(true);
 
+    }*/
+    if (controller->ButtonB()){
+        buttonAWPP = true;
     }
-    if (controllerOne->ButtonX()){
+    /*if (controller->ButtonX()){
         cspinner->matchColor();
     }*/
 }
