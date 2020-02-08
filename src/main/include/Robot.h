@@ -13,6 +13,7 @@
 #include <frc/smartdashboard/SendableChooser.h>
 
 #include <input.h>
+#include <frc/Spark.h>
 
 class Robot : public frc::TimedRobot {
  public:
@@ -33,4 +34,6 @@ class Robot : public frc::TimedRobot {
   const std::string kAutoNameDefault = "Default";
   const std::string kAutoNameCustom = "My Auto";
   std::string m_autoSelected;
+
+  frc::Spark *motor;
 };

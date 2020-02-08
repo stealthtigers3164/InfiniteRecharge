@@ -10,9 +10,7 @@ input::input(){
     //one/two controllers -> choose through smartdashboard??
     controller = new Gamepad(0);
     aligner = new limelight();
-    //ports may change with comp. robot
-    //BL, FL, FR, BR
-    drivechain = new drive(3, 2, 1, 0);
+    drivechain = new drive(1, 2, 3, 0);
 }
 
 void input::update(){
@@ -29,14 +27,14 @@ void input::update(){
         //left and right are the Y axis (joyVector[1])
         float left = LeftStick[1] + adjustment;
         float right = RightStick[1] - adjustment;
-        //reversed right motors
+        //reversed right motors -- may need to change
         right *= -1.0f;
         drivechain->update(left, right);
     } else {
         //left and right are the Y axis (joyVector[1])
         float left = LeftStick[1];
         float right = RightStick[1];
-        //reversed right motors
+        //reversed right motors -- may need to change
         right *= -1.0f;
         drivechain->update(left, right);
     }

@@ -19,7 +19,12 @@ drive::drive(int backLeft, int frontLeft, int frontRight, int backRight){
 
 int drive::update(float left, float right){
     m_frontLeft->Set(left);
+<<<<<<< HEAD
     m_frontRight->Set(left);
     m_backLeft->Set(right);
+=======
+    m_frontRight->Set(right);
+    m_backLeft->Set(left);
+>>>>>>> dev
     m_backRight->Set(right);
 }
