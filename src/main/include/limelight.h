@@ -25,4 +25,10 @@ class limelight{
         limelight();
         //update function -- call this from other files to read limelight data
         float update();
+
+        //rename update() to drive()
+        //currently the code for drivetrain alignment, not turret
+        //add turret() method
+        //turret alignment instead of drive alignment
+        //change all calls to the update() method to the drive() method
 };
