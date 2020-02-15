@@ -114,7 +114,9 @@ class Gamepad{
             float degrees = _gamepad->GetPOV();
             //returns the value of the dpad direction
             //rounded to the nearest integer value (-1, 0, 1)
+            //x axis
             DPadAxes[0] = static_cast<int>(round(cos(degrees * PI/180)));
+            //y axis
             DPadAxes[1] = static_cast<int>(round(sin(degrees * PI/180)));
             //axes[1] = {vecx, vecy};
             return DPadAxes;
@@ -131,6 +133,12 @@ class Gamepad{
             START,
             bLJOY,
             bRJOY,
+            uDPAD,
+            dDPAD,
+            lDPAD,
+            rDPAD,
+            lTRIG,
+            rTRIG,
             NONE
         };
 
@@ -165,6 +173,40 @@ class Gamepad{
                     break;
                 case controller::bRJOY:
                     return gpad->ButtonRightJoy();
+                    break;
+                case controller::uDPAD:
+                    if (DPad()[1] == 1){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    break;
+                case controller::dDPAD:
+                    if (DPad()[1] == -1){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    break;
+                case controller::lDPAD:
+                    if (DPad()[0] == -1){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    break;
+                case controller::rDPAD:
+                    if (DPad()[0] == 1){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    break;
+                case controller::lTRIG:
+                    return LeftTriggerPressed();
+                    break;
+                case controller::rTRIG:
+                    return RightTriggerPressed();
                     break;
                 default:
                     break;
