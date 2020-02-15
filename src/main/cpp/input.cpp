@@ -24,7 +24,6 @@ input::input(){
     cspinner = new color();
 }
 
-bool xButton = false;
 void input::update(){
     
     float* LeftStick = controllerOne->LeftJoystick();
@@ -56,36 +55,52 @@ void input::update(){
         right *= -1;
         drivechain->update(left, right);
     }
-    
-    if (controllerOne->ButtonX()){
+
+    if (getButtonDown(Gamepad::controller::X, controllerOne)){
+        spinToggle = !spinToggle;
+        if (!spinToggle){
+            cspinner->resetSpin();
+        }
+    }
+    if (spinToggle){
         cspinner->spin();
+    } else {
+        cspinner->resetSpin();
     }
-    if (controllerOne->ButtonX()){
+
+    if (getButtonDown(Gamepad::controller::Y, controllerOne)){
+        matchToggle = !matchToggle;
+    }
+    if (matchToggle){
         cspinner->matchColor();
-    }
 
     //pseudo code
     /*
+
     if (button down){
-        spin flywheel;
-        if (flywheel up to speed -- read shooter encoder){
-            iterate indexer to shoot ball
+        limelight::turret();
+    } else {
+        float pow;
+        if (button for left){
+            pow -= 0.5f;
+        }
+        if (button for right){
+            pow += 0.5f;
+        }
+        shooter::updateTurret(pow);
+    }
+
+    if (button down){
+        //change setpoint to desired rpm
+        shooter::updateFlywheel(setpoint);
+        if (rpm == setpoint){
+            //shoot one ball
+            indexer::shoot();
+        } else {
+            //set flywheel to zero speed
+            shooter::updateFlywheel(0);
         }
     }
+
     */
-   /*
-   if (button down){
-       limelight turret;
-   } else if (dpad left/right){
-       move turret left/right;
-   }
-   */
-   /* if (button down){
-       //change setpoint to deired rpm
-       shooter::updateFlywheel(setpoint);
-   } else {
-       //set flywheel to zero speed
-       shooter::updateFlywheel(0);
-   }
-   */
 }

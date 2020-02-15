@@ -12,6 +12,11 @@ color::color(){
     frc::SmartDashboard::PutNumber("Color", 0);
     //set motor to specific port
     motor = new frc::Spark(5);
+
+    //init spin variables
+    previousColor = 0;
+    currentColor = 0;
+    rotationCount = 0;
 }
 
 //reads the color output of the color sensor
@@ -47,36 +52,22 @@ void color::readColor(){
 }
 
 void color::spin(){
-    // init variables
-    int targetColor = 0;
-    int previousColor = 0;
-    int currentColor = 0;
-    int rotationCount = 0;
-    // 8 color slices
-    // 4 turns = 32 slices
-    // +5 margin of error
-    int targetRotations = 37;
-
-    // colors at start of rotations
-    readColor();
-    previousColor = currentColor;
     motor->Set(speed);
-
     // spin until ~3.5 or up to 4.5 rotations
-    // margin of error, as explained above
-    while(rotationCount < targetRotations){
+    // margin of error of 5 color slices
+    if (rotationCount < targetRotations){
         readColor();
         if (currentColor != previousColor){
             rotationCount++;
         }
         previousColor = currentColor;
+    } else {
+        //finish rotating
+        motor->Set(0);
     }
-    //finish rotating
-    motor->Set(0);
 }
 
 void color::matchColor(){
-    motor->SetSpeed(speed);
     //read color replaces previous decleration of variables
     readColor();
     //if gamedata is returned correctly
@@ -105,6 +96,19 @@ void color::matchColor(){
             //if target color is green
                 motor->Set(0);
             }
+        } else {
+            motor->SetSpeed(speed);
         }
+    } else {
+        printf("No gamedata found!");
     }
+}
+
+void color::resetSpin(){
+    //reset spin variables
+    previousColor = 0;
+    currentColor = 0;
+    rotationCount = 0;
+    //turn off motor
+    motor->Set(0);
 }

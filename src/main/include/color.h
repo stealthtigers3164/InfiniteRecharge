@@ -13,11 +13,14 @@ class color{
     public:
 
         color();
-        void readColor();
         void spin();
         void matchColor();
+        void resetSpin();
 
     private:
+
+        void readColor();
+
         static constexpr auto i2cPort = frc::I2C::Port::kOnboard;
         rev::ColorSensorV3 m_colorSensor{i2cPort};
         rev::ColorMatch m_colorMatcher;
@@ -38,6 +41,15 @@ class color{
         frc::Spark *motor;
         //speed -- stays constant
         static constexpr double speed = 0.28;
+
+        //color spin variables
+        int previousColor;
+        int currentColor;
+        int rotationCount;
+        //8 color slices
+        //4 turns = 32 slices
+        //+5 margin of error
+        static const int targetRotations = 37;
 };
     //It will be ran only once -- make constructor
     //deprecated
