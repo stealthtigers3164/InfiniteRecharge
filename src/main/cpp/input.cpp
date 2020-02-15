@@ -35,7 +35,7 @@ void input::update(){
 
     //limelight alignment set to A button
     if (controllerOne->ButtonA()){
-        float adjustment = aligner->update();
+        float adjustment = aligner->drive();
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)
         float left = ((std::abs(LeftStick[1])/LeftStick[1]) * std::pow(LeftStick[1], 2)) + adjustment;
@@ -73,4 +73,19 @@ void input::update(){
         }
     }
     */
+   /*
+   if (button down){
+       limelight turret;
+   } else if (dpad left/right){
+       move turret left/right;
+   }
+   */
+   /* if (button down){
+       //change setpoint to deired rpm
+       shooter::updateFlywheel(setpoint);
+   } else {
+       //set flywheel to zero speed
+       shooter::updateFlywheel(0);
+   }
+   */
 }

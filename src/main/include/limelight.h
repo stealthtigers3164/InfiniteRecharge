@@ -24,7 +24,8 @@ class limelight{
         // public constructor
         limelight();
         //update function -- call this from other files to read limelight data
-        float update();
+        float drive();
+        float turret();
 
         //rename update() to drive()
         //currently the code for drivetrain alignment, not turret
