@@ -56,7 +56,7 @@ void input::update(){
         drivechain->update(left, right);
     }
 
-    if (getButtonDown(Gamepad::controller::X, controllerOne)){
+    if (controllerOne->getButtonDown(Gamepad::controller::X)){
         spinToggle = !spinToggle;
         if (!spinToggle){
             cspinner->resetSpin();
@@ -68,12 +68,12 @@ void input::update(){
         cspinner->resetSpin();
     }
 
-    if (getButtonDown(Gamepad::controller::Y, controllerOne)){
+    if (controllerOne->getButtonDown(Gamepad::controller::Y)){
         matchToggle = !matchToggle;
     }
     if (matchToggle){
         cspinner->matchColor();
-
+    }
     //pseudo code
     /*
 

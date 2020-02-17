@@ -35,8 +35,6 @@ class color{
         frc::Color matchedColor;
         //data sent from field -- which color to match to
         std::string gameData;
-        //current color initiation -- allows readColor() to be void
-        int currentColor;
         //motor
         frc::Spark *motor;
         //speed -- stays constant

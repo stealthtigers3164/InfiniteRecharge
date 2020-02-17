@@ -179,6 +179,125 @@ class Gamepad{
             NONE
         };
 
+        enum triggers{
+            LEFT,
+            RIGHT
+        };
+
+        //takes a controller enum value as input
+        //returns the value of the button that is passed as input
+        bool button(controller button){
+            switch (button){
+                case controller::A:
+                    return this->ButtonA();
+                    break;
+                case controller::B:
+                    return this->ButtonB();
+                    break;
+               case controller::X:
+                   return this->ButtonX();
+                    break;
+                case controller::Y:
+                    return this->ButtonY();
+                    break;
+                case controller::LBUMPER:
+                    return this->LeftBumper();
+                    break;
+                case controller::RBUMPER:
+                    return this->RightBumper();
+                    break;
+                case controller::BACK:
+                    return this->ButtonBack();
+                    break;
+                case controller::START:
+                    return this->ButtonStart();
+                    break;
+                case controller::UDPAD:
+                    if (this->DPad()[1] == 1){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    break;
+                case controller::DDPAD:
+                    if (this->DPad()[1] == -1){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    break;
+                case controller::LDPAD:
+                    if (this->DPad()[0] == -1){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    break;
+                case controller::RDPAD:
+                    if (this->DPad()[0] == 1){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    break;
+                case controller::LTRIG:
+                    return this->LeftTriggerPressed();
+                    break;
+                case controller::RTRIG:
+                    return this->RightTriggerPressed();
+                    break;
+                case controller::LJOY:
+                    return this->ButtonLeftJoy();
+                    break;
+                case controller::RJOY:
+                    return this->ButtonRightJoy();
+                    break;
+                default:
+                    return false;
+                    break;
+            }
+        }
+
+        //takes a triggers enum value as input
+        //returns the value of the trigger that is passed as input
+        float trigger(triggers hand){
+            switch (hand){
+                case triggers::LEFT:
+                    return this->LeftTriggerValue();
+                    break;
+                case triggers::RIGHT:
+                    return this->RightTriggerValue();
+                    break;
+                default:
+                    return 0.0f;
+                    break;
+            }
+        }
+
+        //returns true when the button is first pressed
+        //must be called every telop period to be accurate
+        bool getButtonDown(controller bttn){
+            //current vaule of button
+            this->current[bttn] = this->button(bttn);
+            //evals to true when button is first pressed
+            bool down = ( this->current[bttn] && !(this->previous[bttn]) );
+            //set previous value after eval
+            this->previous[bttn] = this->current[bttn];
+            return down;
+        }
+
+        //returns true when the button is first let up
+        //must be called every telop period to be accurate
+        bool getButtonUp(controller bttn){
+            //current value of button
+            this->current[bttn] = this->button(bttn);
+            //evals to true when button is first let up
+            bool up = ( !(this->current[bttn]) && this->previous[bttn] );
+            //set previous value after eval
+            this->previous[bttn] = this->current[bttn];
+            return up;
+        }
+
         //current button values
         std::map<controller, bool> current;
         //previous button values
@@ -186,106 +305,10 @@ class Gamepad{
 
     private:
 
-        const double PI = 3.14159265;
         Joystick* _gamepad;
         float LJoyAxes[2] = {0.0f, 0.0f};
         float RJoyAxes[2] = {0.0f, 0.0f};
+        const double PI = 3.14159265;
         int DPadAxes[2] = {0, 0};
 
 };
-
-bool button(Gamepad::controller button, Gamepad *gpad){
-    switch (button){
-        case Gamepad::controller::A:
-            return gpad->ButtonA();
-            break;
-        case Gamepad::controller::B:
-            return gpad->ButtonB();
-            break;
-        case Gamepad::controller::X:
-           return gpad->ButtonX();
-            break;
-        case Gamepad::controller::Y:
-            return gpad->ButtonY();
-            break;
-        case Gamepad::controller::LBUMPER:
-            return gpad->LeftBumper();
-            break;
-        case Gamepad::controller::RBUMPER:
-            return gpad->RightBumper();
-            break;
-        case Gamepad::controller::BACK:
-            return gpad->ButtonBack();
-            break;
-        case Gamepad::controller::START:
-            return gpad->ButtonStart();
-            break;
-        case Gamepad::controller::UDPAD:
-            if (gpad->DPad()[1] == 1){
-                return true;
-            } else {
-                return false;
-            }
-            break;
-        case Gamepad::controller::DDPAD:
-            if (gpad->DPad()[1] == -1){
-                return true;
-            } else {
-                return false;
-            }
-            break;
-        case Gamepad::controller::LDPAD:
-            if (gpad->DPad()[0] == -1){
-                return true;
-            } else {
-                return false;
-            }
-            break;
-        case Gamepad::controller::RDPAD:
-            if (gpad->DPad()[0] == 1){
-                return true;
-            } else {
-                return false;
-            }
-            break;
-        case Gamepad::controller::LTRIG:
-            return gpad->LeftTriggerPressed();
-            break;
-        case Gamepad::controller::RTRIG:
-            return gpad->RightTriggerPressed();
-            break;
-        case Gamepad::controller::LJOY:
-            return gpad->ButtonLeftJoy();
-            break;
-        case Gamepad::controller::RJOY:
-            return gpad->ButtonRightJoy();
-            break;
-        default:
-            return false;
-            break;
-    }
-}
-
-//returns true when the button is first pressed
-//must be called every telop period to be accurate
-bool getButtonDown(Gamepad::controller bttn, Gamepad *gpad){
-    //current vaule of button
-    gpad->current[bttn] = button(bttn, gpad);
-    //evals to true when button is first pressed
-    bool down = ( gpad->current[bttn] && !(gpad->previous[bttn]) );
-    //set previous value after eval
-    gpad->previous[bttn] = gpad->current[bttn];
-    return down;
-}
-
-//returns true when the button is first let up
-//must be called every telop period to be accurate
-bool getButtonUp(Gamepad::controller bttn, Gamepad *gpad){
-    //current value of button
-    gpad->current[bttn] = button(bttn, gpad);
-    //evals to true when button is first let up
-    bool up = ( !(gpad->current[bttn]) && gpad->previous[bttn] );
-    //set previous value after eval
-    gpad->previous[bttn] = gpad->current[bttn];
-    return up;
-}
