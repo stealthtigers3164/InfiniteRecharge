@@ -41,8 +41,6 @@ void color::readColor(){
     } else {
         colorString = "Unknown";
     }
-    //receive the color match target
-    gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
     //update smartdashboard
     frc::SmartDashboard::PutNumber("Red", detectedColor.red);
     frc::SmartDashboard::PutNumber("Green", detectedColor.green);
@@ -51,7 +49,7 @@ void color::readColor(){
     frc::SmartDashboard::PutString("Detected Color", colorString);
 }
 
-void color::spin(){
+bool color::spin(){
     motor->Set(speed);
     // spin until ~3.5 or up to 4.5 rotations
     // margin of error of 5 color slices
@@ -61,46 +59,67 @@ void color::spin(){
             rotationCount++;
         }
         previousColor = currentColor;
+        return true;
     } else {
         //finish rotating
+        return false;
         motor->Set(0);
     }
 }
 
-void color::matchColor(){
+bool color::matchColor(){
     //read color replaces previous decleration of variables
     readColor();
+    //receive the color match target
+    gameData = frc::DriverStation::GetInstance().GetGameSpecificMessage();
     //if gamedata is returned correctly
     if (gameData.length() > 0){
-        if (matchedColor == kBlueTarget){
-        //if current color is blue
-            if(gameData[0] == 'R') {
-                //if target color is red
-                motor->Set(0);
-            }
-        } else if (matchedColor == kRedTarget) {
-        //else if current color is red
-            if(gameData[0] == 'B') {
+        motor->Set(speed);
+        std::cout << gameData[0] << std::endl;
+        switch (gameData[0]){
+            //if target color is red
+            case 'R':
+                //if current color is blue
+                if (matchedColor == kBlueTarget){
+                    motor->Set(0);
+                    return false;
+                }
+                return true;
+                break;
             //if target color is blue
-                motor->Set(0);
-            }
-        } else if (matchedColor == kGreenTarget) {
-        //else if current colr is green
-            if(gameData[0] == 'Y') {
+            case 'B':
+                //if current color is red
+                if (matchedColor == kRedTarget){
+                    motor->Set(0);
+                    return false;
+                }
+                return true;
+                break;
             //if target color is yellow
-                motor->Set(0);
-            }
-        } else if (matchedColor ==  kYellowTarget) {
-        //else if current color is yellow
-            if(gameData[0] == 'G') {
+            case 'Y':
+                //if current color is green
+                if (matchedColor == kGreenTarget){
+                    motor->Set(0);
+                    return false;
+                }
+                return true;
+                break;
             //if target color is green
-                motor->Set(0);
-            }
-        } else {
-            motor->SetSpeed(speed);
+            case 'G':
+                //if current color is yellow
+                if (matchedColor ==  kYellowTarget){
+                    motor->Set(0);
+                    return false;
+                }
+                return true;
+                break;
+            default:
+                return true;
+                break;
         }
     } else {
         printf("No gamedata found!");
+        return false;
     }
 }
 

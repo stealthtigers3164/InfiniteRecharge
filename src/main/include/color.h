@@ -13,8 +13,8 @@ class color{
     public:
 
         color();
-        void spin();
-        void matchColor();
+        bool spin();
+        bool matchColor();
         void resetSpin();
 
     private:
@@ -38,7 +38,7 @@ class color{
         //motor
         frc::Spark *motor;
         //speed -- stays constant
-        static constexpr double speed = 0.28;
+        static constexpr double speed = 0.35;
 
         //color spin variables
         int previousColor;
@@ -47,7 +47,7 @@ class color{
         //8 color slices
         //4 turns = 32 slices
         //+5 margin of error
-        static const int targetRotations = 37;
+        static const int targetRotations = 33;
 };
     //It will be ran only once -- make constructor
     //deprecated

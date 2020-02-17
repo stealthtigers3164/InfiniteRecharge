@@ -58,12 +58,9 @@ void input::update(){
 
     if (controllerOne->getButtonDown(Gamepad::controller::X)){
         spinToggle = !spinToggle;
-        if (!spinToggle){
-            cspinner->resetSpin();
-        }
     }
     if (spinToggle){
-        cspinner->spin();
+        spinToggle = cspinner->spin();
     } else {
         cspinner->resetSpin();
     }
@@ -72,8 +69,9 @@ void input::update(){
         matchToggle = !matchToggle;
     }
     if (matchToggle){
-        cspinner->matchColor();
+        matchToggle = cspinner->matchColor();
     }
+
     //pseudo code
     /*
 

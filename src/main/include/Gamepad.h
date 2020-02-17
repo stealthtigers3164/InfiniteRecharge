@@ -179,12 +179,6 @@ class Gamepad{
             NONE
         };
 
-        enum triggers{
-            LEFT,
-            RIGHT,
-            NONE
-        };
-
         //takes a controller enum value as input
         //returns the value of the button that is passed as input
         bool button(controller button){
@@ -261,12 +255,12 @@ class Gamepad{
 
         //takes a triggers enum value as input
         //returns the value of the trigger that is passed as input
-        float trigger(triggers hand){
+        float trigger(controller hand){
             switch (hand){
-                case triggers::LEFT:
+                case controller::LTRIG:
                     return this->LeftTriggerValue();
                     break;
-                case triggers::RIGHT:
+                case controller::RTRIG:
                     return this->RightTriggerValue();
                     break;
                 default:
