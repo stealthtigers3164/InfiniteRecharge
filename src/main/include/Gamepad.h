@@ -181,7 +181,8 @@ class Gamepad{
 
         enum triggers{
             LEFT,
-            RIGHT
+            RIGHT,
+            NONE
         };
 
         //takes a controller enum value as input
