@@ -25,5 +25,9 @@ class input{
         limelight *aligner;
         drive *drivechain;
         color *cspinner;
+        
+        static const int setpoint = 500;
+        bool spinToggle = false;
+        bool matchToggle = false;
 
 };

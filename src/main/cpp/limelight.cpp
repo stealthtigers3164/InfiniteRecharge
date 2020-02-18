@@ -12,7 +12,7 @@ limelight::limelight(){
 }
 
 //update table values
-float limelight::update(){
+float limelight::drive(){
     //update limelight valuse
     table->GetNumber("tx", tx);
     table->GetNumber("ty", ty);
@@ -35,4 +35,20 @@ float limelight::update(){
     //return final power as output -- called only by input the file
     //input has if else that will either align or just use joystick
     return steering_adjust + distance_adjust;
+}
+
+float limelight::turret(){
+    //udate limelight values
+    table->GetNumber("tx", tx);
+
+    float heading_error = -tx;
+    float steering_adjust = 0.0f;
+
+    if (tx > 1.0){
+        steering_adjust = KpAim * heading_error - main_aim_command;
+    } else if (tx < 1.0){
+        steering_adjust = KpAim * heading_error + main_aim_command;
+    }
+
+    return steering_adjust;
 }

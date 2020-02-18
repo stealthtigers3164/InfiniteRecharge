@@ -24,7 +24,6 @@ input::input(){
     cspinner = new color();
 }
 
-bool xButton = false;
 void input::update(){
     
     float* LeftStick = controllerOne->LeftJoystick();
@@ -35,7 +34,7 @@ void input::update(){
 
     //limelight alignment set to A button
     if (controllerOne->ButtonA()){
-        float adjustment = aligner->update();
+        float adjustment = aligner->drive();
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)
         float left = ((std::abs(LeftStick[1])/LeftStick[1]) * std::pow(LeftStick[1], 2)) + adjustment;
@@ -56,21 +55,50 @@ void input::update(){
         right *= -1;
         drivechain->update(left, right);
     }
-    
-    if (controllerOne->ButtonX()){
-        cspinner->spin();
+
+    if (controllerOne->getButtonDown(Gamepad::controller::X)){
+        spinToggle = !spinToggle;
     }
-    if (controllerOne->ButtonX()){
-        cspinner->matchColor();
+    if (spinToggle){
+        spinToggle = cspinner->spin();
+    } else {
+        cspinner->resetSpin();
+    }
+
+    if (controllerOne->getButtonDown(Gamepad::controller::Y)){
+        matchToggle = !matchToggle;
+    }
+    if (matchToggle){
+        matchToggle = cspinner->matchColor();
     }
 
     //pseudo code
     /*
+
     if (button down){
-        spin flywheel;
-        if (flywheel up to speed -- read shooter encoder){
-            iterate indexer to shoot ball
+        limelight::turret();
+    } else {
+        float pow;
+        if (button for left){
+            pow -= 0.5f;
+        }
+        if (button for right){
+            pow += 0.5f;
+        }
+        shooter::updateTurret(pow);
+    }
+
+    if (button down){
+        //change setpoint to desired rpm
+        shooter::updateFlywheel(setpoint);
+        if (rpm == setpoint){
+            //shoot one ball
+            indexer::shoot();
+        } else {
+            //set flywheel to zero speed
+            shooter::updateFlywheel(0);
         }
     }
+
     */
 }

@@ -9,6 +9,7 @@
 #include <frc/Joystick.h>
 #include <iostream>
 #include <math.h>
+#include <map>
 
 using namespace frc;
 
@@ -23,6 +24,42 @@ class Gamepad{
 
         Gamepad(int port){
             _gamepad =  new Joystick(port);
+
+            //initialize all std::map current values to false
+            current[controller::A] = false;
+            current[controller::B] = false;
+            current[controller::X] = false;
+            current[controller::Y] = false;
+            current[controller::LBUMPER] = false;
+            current[controller::RBUMPER] = false;
+            current[controller::BACK] = false;
+            current[controller::START] = false;
+            current[controller::UDPAD] = false;
+            current[controller::DDPAD] = false;
+            current[controller::LDPAD] = false;
+            current[controller::RDPAD] = false;
+            current[controller::LTRIG] = false;
+            current[controller::RTRIG] = false;
+            current[controller::LJOY] = false;
+            current[controller::RJOY] = false;
+            //initialize all std::map previous values to false
+            previous[controller::A] = false;
+            previous[controller::B] = false;
+            previous[controller::X] = false;
+            previous[controller::Y] = false;
+            previous[controller::LBUMPER] = false;
+            previous[controller::RBUMPER] = false;
+            previous[controller::BACK] = false;
+            previous[controller::START] = false;
+            previous[controller::UDPAD] = false;
+            previous[controller::DDPAD] = false;
+            previous[controller::LDPAD] = false;
+            previous[controller::RDPAD] = false;
+            previous[controller::LTRIG] = false;
+            previous[controller::RTRIG] = false;
+            previous[controller::LJOY] = false;
+            previous[controller::RJOY] = false;
+
         }
 
         //button numbers subject to change
@@ -114,7 +151,9 @@ class Gamepad{
             float degrees = _gamepad->GetPOV();
             //returns the value of the dpad direction
             //rounded to the nearest integer value (-1, 0, 1)
+            //x axis
             DPadAxes[0] = static_cast<int>(round(cos(degrees * PI/180)));
+            //y axis
             DPadAxes[1] = static_cast<int>(round(sin(degrees * PI/180)));
             //axes[1] = {vecx, vecy};
             return DPadAxes;
@@ -129,54 +168,142 @@ class Gamepad{
             RBUMPER,
             BACK,
             START,
-            bLJOY,
-            bRJOY,
+            UDPAD,
+            DDPAD,
+            LDPAD,
+            RDPAD,
+            LTRIG,
+            RTRIG,
+            LJOY,
+            RJOY,
             NONE
         };
 
-        bool button(controller button, Gamepad *gpad){
+        //takes a controller enum value as input
+        //returns the value of the button that is passed as input
+        bool button(controller button){
             switch (button){
                 case controller::A:
-                    return gpad->ButtonA();
+                    return this->ButtonA();
                     break;
                 case controller::B:
-                    return gpad->ButtonB();
+                    return this->ButtonB();
                     break;
-                case controller::X:
-                   return gpad->ButtonX();
+               case controller::X:
+                   return this->ButtonX();
                     break;
                 case controller::Y:
-                    return gpad->ButtonY();
+                    return this->ButtonY();
                     break;
                 case controller::LBUMPER:
-                    return gpad->LeftBumper();
+                    return this->LeftBumper();
                     break;
                 case controller::RBUMPER:
-                    return gpad->RightBumper();
+                    return this->RightBumper();
                     break;
                 case controller::BACK:
-                    return gpad->ButtonBack();
+                    return this->ButtonBack();
                     break;
                 case controller::START:
-                    return gpad->ButtonStart();
+                    return this->ButtonStart();
                     break;
-                case controller::bLJOY:
-                    return gpad->ButtonLeftJoy();
+                case controller::UDPAD:
+                    if (this->DPad()[1] == 1){
+                        return true;
+                    } else {
+                        return false;
+                    }
                     break;
-                case controller::bRJOY:
-                    return gpad->ButtonRightJoy();
+                case controller::DDPAD:
+                    if (this->DPad()[1] == -1){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    break;
+                case controller::LDPAD:
+                    if (this->DPad()[0] == -1){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    break;
+                case controller::RDPAD:
+                    if (this->DPad()[0] == 1){
+                        return true;
+                    } else {
+                        return false;
+                    }
+                    break;
+                case controller::LTRIG:
+                    return this->LeftTriggerPressed();
+                    break;
+                case controller::RTRIG:
+                    return this->RightTriggerPressed();
+                    break;
+                case controller::LJOY:
+                    return this->ButtonLeftJoy();
+                    break;
+                case controller::RJOY:
+                    return this->ButtonRightJoy();
                     break;
                 default:
+                    return false;
                     break;
             }
         }
 
+        //takes a triggers enum value as input
+        //returns the value of the trigger that is passed as input
+        float trigger(controller hand){
+            switch (hand){
+                case controller::LTRIG:
+                    return this->LeftTriggerValue();
+                    break;
+                case controller::RTRIG:
+                    return this->RightTriggerValue();
+                    break;
+                default:
+                    return 0.0f;
+                    break;
+            }
+        }
+
+        //returns true when the button is first pressed
+        //must be called every telop period to be accurate
+        bool getButtonDown(controller bttn){
+            //current vaule of button
+            this->current[bttn] = this->button(bttn);
+            //evals to true when button is first pressed
+            bool down = ( this->current[bttn] && !(this->previous[bttn]) );
+            //set previous value after eval
+            this->previous[bttn] = this->current[bttn];
+            return down;
+        }
+
+        //returns true when the button is first let up
+        //must be called every telop period to be accurate
+        bool getButtonUp(controller bttn){
+            //current value of button
+            this->current[bttn] = this->button(bttn);
+            //evals to true when button is first let up
+            bool up = ( !(this->current[bttn]) && this->previous[bttn] );
+            //set previous value after eval
+            this->previous[bttn] = this->current[bttn];
+            return up;
+        }
+
+        //current button values
+        std::map<controller, bool> current;
+        //previous button values
+        std::map<controller, bool> previous;
+
     private:
 
-        const double PI = 3.14159265;
         Joystick* _gamepad;
         float LJoyAxes[2] = {0.0f, 0.0f};
         float RJoyAxes[2] = {0.0f, 0.0f};
+        const double PI = 3.14159265;
         int DPadAxes[2] = {0, 0};
 
 };

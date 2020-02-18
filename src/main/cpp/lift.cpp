@@ -15,7 +15,7 @@ lift::lift(int portOne, int portTwo){
 }
 
 //set motor power to power argument
-lift::update(float power){
+void lift::update(float power){
     motorOne->Set(power);
     motorTwo->Set(power);
 }
