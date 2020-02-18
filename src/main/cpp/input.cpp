@@ -19,7 +19,7 @@ input::input(){
     //BL, FL, FR, BR
     // GOL:                6, 7, 9, 8
     // Winchless:          1, 2, 3, 0
-    drivechain = new drive(1, 2, 3, 0);
+    drivechain = new drive(6, 7, 9, 8);
     //color sensor
     cspinner = new color();
 }
@@ -42,7 +42,7 @@ void input::update(){
         //motors flipped
         // GOL:         left *= -1;
         // Winchless:   right *= -1;
-        right *= -1;
+        left *= -1;
         drivechain->update(left, right);
     } else {
         //left and right are the Y axis (joyVector[1])
@@ -52,7 +52,7 @@ void input::update(){
         //motors flipped
         // GOL:         left *= -1;
         // Winchless:   right *= -1;
-        right *= -1;
+        left *= -1;
         drivechain->update(left, right);
     }
 
