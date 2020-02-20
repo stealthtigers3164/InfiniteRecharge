@@ -5,7 +5,6 @@
 #include <Gamepad.h>
 #include <math.h>
 #include <iostream>
-
 //constructor
 input::input(){
     //possibly add second gamepad
@@ -101,4 +100,14 @@ void input::update(){
     }
 
     */
+}
+
+bool input::limelight(input controls){
+    switch (controls.controller){
+        case driver::ONE:
+            return controllerOne->button(controls.button);
+            break;
+        default:
+            break;
+    }
 }

@@ -3,6 +3,7 @@
 #include <limelight.h>
 #include <drive.h>
 #include <color.h>
+#include <Dashboard.h>
 
 //input class
 //detects input from controllers using the gamepad wrapper
@@ -19,6 +20,8 @@ class input{
         void update();
 
     private:
+
+        bool limelight();
 
         Gamepad *controllerOne;
         Gamepad *controllerTwo;
