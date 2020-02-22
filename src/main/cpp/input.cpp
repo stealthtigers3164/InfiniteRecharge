@@ -3,6 +3,7 @@
 #include <drive.h>
 #include <color.h>
 #include <Gamepad.h>
+#include <dashboard.h>
 #include <math.h>
 #include <iostream>
 //constructor
@@ -102,12 +103,12 @@ void input::update(){
     */
 }
 
-bool input::alignment(inputChooser controls){
+bool input::alignment(shuffle::inputChooser controls){
     switch (controls.controller){
-        case driver::ONE:
+        case shuffle::driver::ONE:
             return controllerOne->button(controls.button);
             break;
-        case driver::TWO:
+        case shuffle::driver::TWO:
             return controllerTwo->button(controls.button);
             break;
         default:

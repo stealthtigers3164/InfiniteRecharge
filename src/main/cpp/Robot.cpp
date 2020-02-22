@@ -41,7 +41,6 @@ void Robot::RobotInit() {
  */
 void Robot::RobotPeriodic() {
   humani->update();
-  DashboardCheck();
 }
 
 /**

@@ -3,7 +3,7 @@
 #include <limelight.h>
 #include <drive.h>
 #include <color.h>
-#include <Dashboard.h>
+#include <dashboard.h>
 
 //input class
 //detects input from controllers using the gamepad wrapper
@@ -21,7 +21,7 @@ class input{
 
     private:
 
-        bool alignment(inputChooser controls);
+        bool alignment(shuffle::inputChooser controls);
 
         Gamepad *controllerOne;
         Gamepad *controllerTwo;
