@@ -22,11 +22,11 @@ std::string m_autoSelected;
 std::string m_PrevDriverSelected = "Default";
 std::string m_DriverSelected;
 
-frc::SendableChooser<input> m_ColourWheel;
-frc::SendableChooser<input> m_LimeAutoAlignment;
-frc::SendableChooser<input> m_Shooter;
-frc::SendableChooser<input> m_Driver;
-frc::SendableChooser<input> m_PrevDriver;
+frc::SendableChooser<inputChooser> m_ColourWheel;
+frc::SendableChooser<inputChooser> m_LimeAutoAlignment;
+frc::SendableChooser<inputChooser> m_Shooter;
+frc::SendableChooser<inputChooser> m_Driver;
+frc::SendableChooser<inputChooser> m_PrevDriver;
 
 enum driver{
     ONE,
@@ -34,44 +34,116 @@ enum driver{
     NONE
 };
 
-struct input{
+struct inputChooser{
     Gamepad::controller button;
     driver controller;
 };
 
-input oneA;
-input oneB;
-input oneX;
-input oneY;
-input oneLBUMPER;
-input oneRBUMPER;
-input oneBACK;
-input oneSTART;
-input oneUPDPAD;
-input oneDDPAD;
-input oneLDPAD;
-input oneRDPAD;
-input oneLTRIG;
-input oneRTRIG;
-input oneLJOY;
-input oneRJOY;
-input twoA;
-input twoB;
-input twoX;
-input twoY;
-input twoLBUMPER;
-input twoRBUMPER;
-input twoBACK;
-input twoSTART;
-input twoUPDPAD;
-input twoDDPAD;
-input twoLDPAD;
-input twoRDPAD;
-input twoLTRIG;
-input twoRTRIG;
-input twoLJOY;
-input twoRJOY;
-input none;
+inputChooser oneA;
+inputChooser oneB;
+inputChooser oneX;
+inputChooser oneY;
+inputChooser oneLBUMPER;
+inputChooser oneRBUMPER;
+inputChooser oneBACK;
+inputChooser oneSTART;
+inputChooser oneUDPAD;
+inputChooser oneDDPAD;
+inputChooser oneLDPAD;
+inputChooser oneRDPAD;
+inputChooser oneLTRIG;
+inputChooser oneRTRIG;
+inputChooser oneLJOY;
+inputChooser oneRJOY;
+inputChooser twoA;
+inputChooser twoB;
+inputChooser twoX;
+inputChooser twoY;
+inputChooser twoLBUMPER;
+inputChooser twoRBUMPER;
+inputChooser twoBACK;
+inputChooser twoSTART;
+inputChooser twoUDPAD;
+inputChooser twoDDPAD;
+inputChooser twoLDPAD;
+inputChooser twoRDPAD;
+inputChooser twoLTRIG;
+inputChooser twoRTRIG;
+inputChooser twoLJOY;
+inputChooser twoRJOY;
+inputChooser none;
+
+inputChooser buttonsList[33] = {
+    oneA,
+    oneB,
+    oneX,
+    oneY,
+    oneLBUMPER,
+    oneRBUMPER,
+    oneBACK,
+    oneSTART,
+    oneUDPAD,
+    oneDDPAD,
+    oneLDPAD,
+    oneRDPAD,
+    oneLTRIG,
+    oneRTRIG,
+    oneLJOY,
+    oneRJOY,
+    twoA,
+    twoB,
+    twoX,
+    twoY,
+    twoLBUMPER,
+    twoRBUMPER,
+    twoBACK,
+    twoSTART,
+    twoUDPAD,
+    twoDDPAD,
+    twoLDPAD,
+    twoRDPAD,
+    twoLTRIG,
+    twoRTRIG,
+    twoLJOY,
+    twoRJOY,
+    none
+};
+
+std::string names[33] = {
+    "A 1",
+    "B 1",
+    "X 1",
+    "Y 1",
+    "Left Bumper 1",
+    "Right Bumper 1",
+    "Dpad Up 1",
+    "Dpad Down 1",
+    "Dpad Left 1",
+    "Dpad Right 1",
+    "Left Trigger 1",
+    "Right Trigger 1",
+    "Left Joystick Button 1",
+    "Right Joystick Button 1",
+    "Start 1",
+    "Back 1",
+    "A 2",
+    "B 2",
+    "X 2",
+    "Y 2",
+    "Left Bumper 2",
+    "Right Bumper 2",
+    "Dpad Up 2",
+    "Dpad Down 2",
+    "Dpad Left 2",
+    "Dpad Right 2",
+    "Left Trigger 2",
+    "Right Trigger 2",
+    "Left Joystick Button 2",
+    "Right Joystick Button 2",
+    "Start 2",
+    "Back 2",
+    "None"
+};
 
 void DashInit(){
 
@@ -85,10 +157,8 @@ void DashInit(){
     oneY.controller = driver::ONE;
     oneLBUMPER.button = Gamepad::controller::LBUMPER;
     oneLBUMPER.controller = driver::ONE;
-    oneSTART.button = Gamepad::controller::START;
-    oneSTART.controller = driver::ONE;
-    oneUPDPAD.button = Gamepad::controller::UDPAD;
-    oneUPDPAD.controller = driver::ONE;
+    oneUDPAD.button = Gamepad::controller::UDPAD;
+    oneUDPAD.controller = driver::ONE;
     oneDDPAD.button = Gamepad::controller::DDPAD;
     oneDDPAD.controller = driver::ONE;
     oneLDPAD.button = Gamepad::controller::LDPAD;
@@ -103,6 +173,10 @@ void DashInit(){
     oneLJOY.controller = driver::ONE;
     oneRJOY.button = Gamepad::controller::RJOY;
     oneRJOY.controller = driver::ONE;
+    oneSTART.button = Gamepad::controller::START;
+    oneSTART.controller = driver::ONE;
+    oneBACK.button = Gamepad::controller::BACK;
+    oneBACK.controller = driver::ONE;
     twoA.button = Gamepad::controller::A;
     twoA.controller = driver::TWO;
     twoB.button = Gamepad::controller::B;
@@ -115,12 +189,8 @@ void DashInit(){
     twoLBUMPER.controller = driver::TWO;
     twoRBUMPER.button = Gamepad::controller::RBUMPER;
     twoRBUMPER.controller = driver::TWO;
-    twoBACK.button = Gamepad::controller::BACK;
-    twoBACK.controller = driver::TWO;
-    twoSTART.button = Gamepad::controller::START;
-    twoSTART.controller = driver::TWO;
-    twoUPDPAD.button = Gamepad::controller::UDPAD;
-    twoUPDPAD.controller = driver::TWO;
+    twoUDPAD.button = Gamepad::controller::UDPAD;
+    twoUDPAD.controller = driver::TWO;
     twoDDPAD.button = Gamepad::controller::DDPAD;
     twoDDPAD.controller = driver::TWO;
     twoLDPAD.button = Gamepad::controller::LDPAD;
@@ -137,72 +207,30 @@ void DashInit(){
     oneRJOY.controller = driver::TWO;
     none.button = Gamepad::controller::NONE;
     none.controller = driver::NONE;
+    twoSTART.button = Gamepad::controller::START;
+    twoSTART.controller = driver::TWO;
+    twoBACK.button = Gamepad::controller::BACK;
+    twoBACK.controller = driver::TWO;
+
+    for (int i=0; i<33; i++){
+        m_ColourWheel.AddOption(names[i], buttonsList[i]);
+        m_LimeAutoAlignment.AddOption(names[i], buttonsList[i]);
+        m_Shooter.AddOption.AddObject(names[i], buttonsList[i]);
+    }
 
     m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
     m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
     frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
-    m_ColourWheel.AddOption("A 1", oneA);
-    m_ColourWheel.AddOption("A 2", twoA);
-    m_ColourWheel.AddOption("B 1", oneB);
-    m_ColourWheel.AddOption("B 2", twoB);
-    m_ColourWheel.AddOption("X 1", oneX);
-    m_ColourWheel.AddOption("X 2", twoX);
-    m_ColourWheel.AddOption("Y 1", oneY);
-    m_ColourWheel.AddOption("Y 2", twoY);
-/* input oneLBUMPER;
-input oneRBUMPER;
-input oneBACK;
-input oneSTART;
-input oneUPDPAD;
-input oneDDPAD;
-input oneLDPAD;
-input oneRDPAD;
-input oneLTRIG;
-input oneRTRIG;
-input oneLJOY;
-input oneRJOY; */
-    m_ColourWheel.AddOption("Left Bumper 1");
-    m_ColourWheel.AddOption("Left Bumper 2");
-    m_ColourWheel.AddOption("Right Bumper 1");
-    m_ColourWheel.AddOption("Right Bumper 2");
-    m_ColourWheel.AddOption("Dpad Up 1");
-    m_ColourWheel.AddOption("Dpad Up 2");
-    m_ColourWheel.AddOption("Dpad Down 1");
-    m_ColourWheel.AddOption("Dpad Down 2");
-    m_ColourWheel.AddOption("Dpad Left 1");
-    m_ColourWheel.AddOption("Dpad Left 2");
-    m_ColourWheel.AddOption("Dpad Right 1");
-    m_ColourWheel.AddOption("Dpad Right 2");
-    m_ColourWheel.AddOption();
-    m_ColourWheel.AddOption();
-    m_ColourWheel.AddOption();
-    m_ColourWheel.AddOption();
-    m_ColourWheel.AddOption();
-    m_ColourWheel.AddOption();
-    m_ColourWheel.AddOption();
-    m_ColourWheel.AddOption();
-    m_ColourWheel.AddOption();
-    m_ColourWheel.AddOption();
-    m_ColourWheel.AddOption();
-    m_ColourWheel.AddOption();
-    m_ColourWheel.SetDefaultOption("X1", oneX);
+    m_ColourWheel.SetDefaultOption("X 1", oneX);
     frc::SmartDashboard::PutData("Colour Wheel", &m_ColourWheel);
 
-    m_LimeAutoAlignment.AddOption("A", "A");
-    m_LimeAutoAlignment.AddOption("B", "B");
-    m_LimeAutoAlignment.AddOption("X", "X");
-    m_LimeAutoAlignment.AddOption("Y", "Y");
-    m_LimeAutoAlignment.SetDefaultOption("B", "B");
+    m_LimeAutoAlignment.SetDefaultOption("A 1", oneA);
     frc::SmartDashboard::PutData("Limelight", &m_LimeAutoAlignment);
 
-    m_Shooter.AddOption("A", "A");
-    m_Shooter.AddOption("B", "B");
-    m_Shooter.AddOption("X", "X");
-    m_Shooter.AddOption("Y", "Y");
-    m_Shooter.SetDefaultOption("X", "X");
+    m_Shooter.SetDefaultOption("Right Bumper 1", oneRBUMPER);
     frc::SmartDashboard::PutData("Shooter", &m_Shooter);
-
+    
     m_Driver.AddOption("Default", "Default");
     m_Driver.AddOption("Driver1", "Driver1");
     m_Driver.AddOption("Driver2", "Driver2");

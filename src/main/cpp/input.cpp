@@ -102,12 +102,16 @@ void input::update(){
     */
 }
 
-bool input::limelight(input controls){
+bool input::alignment(inputChooser controls){
     switch (controls.controller){
         case driver::ONE:
             return controllerOne->button(controls.button);
             break;
+        case driver::TWO:
+            return controllerTwo->button(controls.button);
+            break;
         default:
+            return false;
             break;
     }
 }

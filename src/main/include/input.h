@@ -21,7 +21,7 @@ class input{
 
     private:
 
-        bool limelight();
+        bool alignment(inputChooser controls);
 
         Gamepad *controllerOne;
         Gamepad *controllerTwo;
