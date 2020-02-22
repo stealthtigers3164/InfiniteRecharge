@@ -73,7 +73,7 @@ shuffle::shuffle(){
     twoBACK.controller = driver::TWO;
 
     for (int i=0; i<33; i++){
-        m_ColourWheel.AddOption(names[i], buttonsList[i]);
+        m_ColorWheel.AddOption(names[i], buttonsList[i]);
         m_LimeAutoAlignment.AddOption(names[i], buttonsList[i]);
         m_Shooter.AddOption(names[i], buttonsList[i]);
     }
@@ -82,8 +82,8 @@ shuffle::shuffle(){
     m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
     frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
-    m_ColourWheel.SetDefaultOption("X 1", oneX);
-    frc::SmartDashboard::PutData("Colour Wheel", &m_ColourWheel);
+    m_ColorWheel.SetDefaultOption("X 1", oneX);
+    frc::SmartDashboard::PutData("Color Wheel", &m_ColorWheel);
 
     m_LimeAutoAlignment.SetDefaultOption("A 1", oneA);
     frc::SmartDashboard::PutData("Limelight", &m_LimeAutoAlignment);

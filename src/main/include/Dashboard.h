@@ -42,7 +42,7 @@ class shuffle{
         std::string m_PrevDriverSelected;
         std::string m_DriverSelected;
 
-        frc::SendableChooser<inputChooser> m_ColourWheel;
+        frc::SendableChooser<inputChooser> m_ColorWheel;
         frc::SendableChooser<inputChooser> m_LimeAutoAlignment;
         frc::SendableChooser<inputChooser> m_Shooter;
         frc::SendableChooser<std::string> m_Driver;

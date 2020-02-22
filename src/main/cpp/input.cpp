@@ -22,6 +22,7 @@ input::input(){
     drivechain = new drive(1, 2, 3, 0);
     //color sensor
     cspinner = new color();
+    dash = new shuffle();
 }
 
 void input::update(){
