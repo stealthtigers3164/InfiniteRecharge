@@ -37,8 +37,8 @@ void input::update(){
         float adjustment = aligner->drive();
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)
-        float left = ((std::abs(LeftStick[1])/LeftStick[1]) * std::pow(LeftStick[1], 2)) + adjustment;
-        float right = ((std::abs(RightStick[1])/RightStick[1]) * std::pow(RightStick[1], 2)) - adjustment;
+        float left = (LeftStick[1] - adjustment);
+        float right = (RightStick[1] + adjustment);
         //motors flipped
         // GOL:         left *= -1;
         // Winchless:   right *= -1;
@@ -47,8 +47,8 @@ void input::update(){
     } else {
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)
-        float left = (std::abs(LeftStick[1])/LeftStick[1]) * std::pow(LeftStick[1], 2);
-        float right = (std::abs(RightStick[1])/RightStick[1]) * std::pow(RightStick[1], 2);
+        float left = std::abs(LeftStick[1]) * LeftStick[1];
+        float right = std::abs(RightStick[1]) * RightStick[1];
         //motors flipped
         // GOL:         left *= -1;
         // Winchless:   right *= -1;
