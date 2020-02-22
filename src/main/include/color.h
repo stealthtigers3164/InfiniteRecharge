@@ -1,12 +1,12 @@
 #pragma once
 
-#include < string > 
-#include < frc/Spark.h > 
-#include < frc/TimedRobot.h > 
-#include < frc/smartdashboard/SmartDashboard.h > 
-#include < frc/DriverStation.h > 
-#include < rev/ColorSensorV3.h > 
-#include < rev/ColorMatch.h > 
+#include <string>
+#include <frc/Spark.h> 
+#include <frc/TimedRobot.h> 
+#include <frc/smartdashboard/SmartDashboard.h> 
+#include <frc/DriverStation.h> 
+#include <rev/ColorSensorV3.h> 
+#include <rev/ColorMatch.h> 
 
 class color {
 

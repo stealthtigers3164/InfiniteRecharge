@@ -22,12 +22,6 @@ std::string m_autoSelected;
 std::string m_PrevDriverSelected = "Default";
 std::string m_DriverSelected;
 
-frc::SendableChooser<inputChooser> m_ColourWheel;
-frc::SendableChooser<inputChooser> m_LimeAutoAlignment;
-frc::SendableChooser<inputChooser> m_Shooter;
-frc::SendableChooser<inputChooser> m_Driver;
-frc::SendableChooser<inputChooser> m_PrevDriver;
-
 enum driver{
     ONE,
     TWO,
@@ -38,6 +32,12 @@ struct inputChooser{
     Gamepad::controller button;
     driver controller;
 };
+
+frc::SendableChooser<inputChooser> m_ColourWheel;
+frc::SendableChooser<inputChooser> m_LimeAutoAlignment;
+frc::SendableChooser<inputChooser> m_Shooter;
+frc::SendableChooser<std::string> m_Driver;
+frc::SendableChooser<std::string> m_PrevDriver;
 
 inputChooser oneA;
 inputChooser oneB;
@@ -215,7 +215,7 @@ void DashInit(){
     for (int i=0; i<33; i++){
         m_ColourWheel.AddOption(names[i], buttonsList[i]);
         m_LimeAutoAlignment.AddOption(names[i], buttonsList[i]);
-        m_Shooter.AddOption.AddObject(names[i], buttonsList[i]);
+        m_Shooter.AddOption(names[i], buttonsList[i]);
     }
 
     m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
@@ -243,11 +243,11 @@ void DashboardCheck(){
     m_DriverSelected = m_Driver.GetSelected();
     if (m_PrevDriverSelected != m_DriverSelected){
         if (m_DriverSelected == "Driver1"){
-            m_Shooter.SetDefaultOption("Y", "Y");
+            m_Shooter.SetDefaultOption("Y", oneY);
             frc::SmartDashboard::PutData("Shooter", &m_Shooter);
         }
         else if (m_DriverSelected == "Driver2"){
-            m_Shooter.SetDefaultOption("X", "X");
+            m_Shooter.SetDefaultOption("X", oneX);
             frc::SmartDashboard::PutData("Shooter", &m_Shooter);
         }
     }
