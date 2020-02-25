@@ -17,18 +17,16 @@ float limelight::drive(){
     if (table == NULL) {
         table =  nt::NetworkTableInstance::GetDefault().GetTable("limelight");
     }
-    //update limelight valuse
-    table->GetNumber("tx", tx);
-    table->GetNumber("ty", ty);
-    table->GetNumber("tv", tv);
+    //update limelight values
+    tx = table->GetNumber("tx", 0);
+    ty = table->GetNumber("ty", 0);
+    tv = table->GetNumber("tv", 0);
     float heading_error = -tx;
     float distance_error = -ty;
     float steering_adjust = 0.0f;
 
-    //tx = ((std::abs(tx)/tx) * std::sqrt((std::abs(tx)/tx)*tx));
-    //ty = ((std::abs(ty)/ty) * std::sqrt((std::abs(ty)/ty)*ty));
-
-    
+    printf("%f\n", tx);
+    printf("%f\n", ty);
 
     //horizontal calculations
     //adjust weights for calibration
@@ -40,12 +38,14 @@ float limelight::drive(){
 
 
     //distance calculations
-    float distance_adjust = KpDistance * distance_error;
+//    float distance_adjust = KpDistance * distance_error;
 
     //return final power as output -- called only by input the file
     //input has if else that will either align or just use joystick
-    return steering_adjust + distance_adjust;
+    return steering_adjust;// + distance_adjust;
 }
+
+//deprecated
 /*
 float limelight::turret(){
     if (table == NULL) {
