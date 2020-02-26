@@ -13,9 +13,9 @@ limelight::limelight(){
 
 //update table values
 float limelight::drive(){
-    //update limelight valuse
-    table->GetNumber("tx", tx);
-    table->GetNumber("ty", ty);
+    //update limelight values
+    tx = table->GetNumber("tx", 0);
+    ty = table->GetNumber("ty", 0);
 
     float heading_error = -tx;
     float distance_error = -ty;
