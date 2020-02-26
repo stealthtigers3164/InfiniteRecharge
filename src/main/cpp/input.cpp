@@ -34,7 +34,7 @@ void input::update(){
     //printf("Right Joystick\n\nX:%f\nY:%f\n\n", RightStick[0], RightStick[1]);
 
     //limelight alignment set to A button
-    if (controllerOne->ButtonA()){
+    if (alignment(dash->mechButton(shuffle::mechs::ALIGN))){
         float adjustment = aligner->drive();
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)

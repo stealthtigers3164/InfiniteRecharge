@@ -98,3 +98,17 @@ shuffle::shuffle(){
     m_Driver.SetDefaultOption("Default", "Default");
     frc::SmartDashboard::PutData("Driver", &m_Driver);
 }
+
+shuffle::inputChooser shuffle::mechButton(mechs mech){
+    switch (mech){
+        case ALIGN:
+            return m_LimeAutoAlignment.GetSelected();
+            break;
+        case SPINCOLOR:
+            return m_ColorWheel.GetSelected();
+            break;
+        default:
+            return none;
+            break;
+    };
+}

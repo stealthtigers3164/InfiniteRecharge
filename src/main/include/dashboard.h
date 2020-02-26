@@ -27,10 +27,21 @@ class shuffle{
             NONE
         };
 
-        struct inputChooser{
+        enum mechs{
+            ALIGN,
+            SPINCOLOR,
+            MATCHCOLOR,
+        };
+
+        typedef struct inputChooser{
             Gamepad::controller button;
             driver controller;
         };
+
+        //takes a member from enum shuffle::mech as input
+        //returns the struct shuffle::inputChooser associated with the mechanism
+        //select the mechanism from smartdashboard during runtime
+        inputChooser mechButton(mechs mech);
 
     private:
 
