@@ -16,6 +16,7 @@ class limelight{
 
         float tx;
         float ty;
+        float tv;
 
         // network table to pull limelight values from
         std::shared_ptr<NetworkTable> table;

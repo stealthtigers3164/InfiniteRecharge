@@ -19,7 +19,7 @@ input::input(){
     //BL, FL, FR, BR
     // GOL:                6, 7, 9, 8
     // Winchless:          1, 2, 3, 0
-    drivechain = new drive(1, 2, 3, 0);
+    drivechain = new drive(6, 7, 9, 8);
     //color sensor
     cspinner = new color();
 }
@@ -37,22 +37,22 @@ void input::update(){
         float adjustment = aligner->drive();
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)
-        float left = ((std::abs(LeftStick[1])/LeftStick[1]) * std::pow(LeftStick[1], 2)) + adjustment;
-        float right = ((std::abs(RightStick[1])/RightStick[1]) * std::pow(RightStick[1], 2)) - adjustment;
+        float left = (LeftStick[1] - adjustment);
+        float right = (RightStick[1] + adjustment);
         //motors flipped
         // GOL:         left *= -1;
         // Winchless:   right *= -1;
-        right *= -1;
+        left *= -1;
         drivechain->update(left, right);
     } else {
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)
-        float left = (std::abs(LeftStick[1])/LeftStick[1]) * std::pow(LeftStick[1], 2);
-        float right = (std::abs(RightStick[1])/RightStick[1]) * std::pow(RightStick[1], 2);
+        float left = std::abs(LeftStick[1]) * LeftStick[1];
+        float right = std::abs(RightStick[1]) * RightStick[1];
         //motors flipped
         // GOL:         left *= -1;
         // Winchless:   right *= -1;
-        right *= -1;
+        left *= -1;
         drivechain->update(left, right);
     }
 

@@ -15,6 +15,7 @@
 
 #include "cameraserver/CameraServer.h"
 
+#include <Dashboard.h>
 
 
 Robot::Robot(){
@@ -29,6 +30,7 @@ void Robot::RobotInit() {
   frc::CameraServer::GetInstance()->StartAutomaticCapture();
   // Creates the CvSink and connects it to the UsbCamera
   cs::CvSink cvSink = frc::CameraServer::GetInstance()->GetVideo();
+  DashInit();
 }
 
 /**
@@ -41,6 +43,7 @@ void Robot::RobotInit() {
  */
 void Robot::RobotPeriodic() {
   humani->update();
+  DashCheck();
 }
 
 /**

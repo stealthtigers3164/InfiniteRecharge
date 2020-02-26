@@ -1,3 +1,4 @@
+#include <iostream>
 #include <frc/smartdashboard/Smartdashboard.h>
 #include <networktables/Networktable.h>
 #include <networktables/NetworkTableInstance.h>
@@ -13,13 +14,19 @@ limelight::limelight(){
 
 //update table values
 float limelight::drive(){
-    //update limelight valuse
-    table->GetNumber("tx", tx);
-    table->GetNumber("ty", ty);
-
+    if (table == NULL) {
+        table =  nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+    }
+    //update limelight values
+    tx = table->GetNumber("tx", 0);
+    ty = table->GetNumber("ty", 0);
+    tv = table->GetNumber("tv", 0);
     float heading_error = -tx;
     float distance_error = -ty;
     float steering_adjust = 0.0f;
+
+    printf("%f\n", tx);
+    printf("%f\n", ty);
 
     //horizontal calculations
     //adjust weights for calibration
@@ -29,15 +36,21 @@ float limelight::drive(){
         steering_adjust = KpAim * heading_error + main_aim_command;
     }
 
+
     //distance calculations
-    float distance_adjust = KpDistance * distance_error;
+//    float distance_adjust = KpDistance * distance_error;
 
     //return final power as output -- called only by input the file
     //input has if else that will either align or just use joystick
-    return steering_adjust + distance_adjust;
+    return steering_adjust;// + distance_adjust;
 }
 
+//deprecated
+/*
 float limelight::turret(){
+    if (table == NULL) {
+        table =  nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+    }
     //udate limelight values
     table->GetNumber("tx", tx);
 
@@ -51,4 +64,4 @@ float limelight::turret(){
     }
 
     return steering_adjust;
-}
+}*/
