@@ -14,6 +14,7 @@ lift::lift(int portOne, int portTwo){
     motorTwo = new frc::Spark(portTwo);
 }
 
+
 //set motor power to power argument
 void lift::update(float power){
     motorOne->Set(power);

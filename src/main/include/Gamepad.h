@@ -299,11 +299,9 @@ class Gamepad{
         std::map<controller, bool> previous;
 
     private:
-
         Joystick* _gamepad;
         float LJoyAxes[2] = {0.0f, 0.0f};
         float RJoyAxes[2] = {0.0f, 0.0f};
         const double PI = 3.14159265;
         int DPadAxes[2] = {0, 0};
-
 };

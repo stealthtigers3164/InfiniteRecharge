@@ -19,3 +19,17 @@ void indexer::update(float power){
     vOne->Set(power);
     vTwo->Set(power);
 }
+
+//returns the current number of balls in the indexer as counted by the limit switch
+int indexer::countIndex(){
+    if((prevSwitcher != switcher) && switcher){ 
+        balls++;
+    }
+    prevSwitcher = switcher;
+    /* added this uhhhhhhhh
+    switcher = (button what?) >> (gets whatever buttons value based on what is operating it )
+    if (limit switch >> get()) 
+    output = fmin(output, 0)
+    Lol i have a link we can refer too 
+    */
+}

@@ -17,6 +17,8 @@
 
 #include <Dashboard.h>
 
+#include <indexer.h>
+
 
 Robot::Robot(){
   humani = new input();
@@ -31,6 +33,7 @@ void Robot::RobotInit() {
   // Creates the CvSink and connects it to the UsbCamera
   cs::CvSink cvSink = frc::CameraServer::GetInstance()->GetVideo();
   DashInit();
+  
 }
 
 /**
