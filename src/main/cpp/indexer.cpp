@@ -1,6 +1,7 @@
 #include <frc/Victor.h>
 #include <indexer.h>
 
+
 //default constructor -- do not use
 indexer::indexer(){
     printf("default indexer constructor -- do not use");
@@ -10,6 +11,7 @@ indexer::indexer(){
 indexer::indexer(int pOne, int pTwo){
     vOne = new frc::Victor(pOne);
     vTwo = new frc::Victor(pTwo);
+    forwardLimitSwitch = new frc::DigitalInput(1);
 }
 
 //takes a range from -1 to 1

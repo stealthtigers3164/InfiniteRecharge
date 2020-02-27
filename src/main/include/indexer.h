@@ -1,5 +1,6 @@
 #pragma once
 #include <frc/Victor.h>
+#include <frc/DigitalInput.h>
 
 class indexer{
 
@@ -8,6 +9,7 @@ class indexer{
         //placeholder motors one and two
         frc::Victor *vOne;
         frc::Victor *vTwo;
+        frc::DigitalInput *forwardLimitSwitch;
 
     public:
         bool prevSwitcher = false;
@@ -21,5 +23,8 @@ class indexer{
         void update(float power);
         //counts the amount of balls in the indexer
         int countIndex();
+
+        void indInit();
+        void indTeleOP();
 
 };

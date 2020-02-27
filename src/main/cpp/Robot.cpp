@@ -20,8 +20,11 @@
 #include <indexer.h>
 
 
+
+
 Robot::Robot(){
   humani = new input();
+  
 }
 
 void Robot::RobotInit() {
