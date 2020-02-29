@@ -59,6 +59,23 @@ class Gamepad{
             previous[controller::RTRIG] = false;
             previous[controller::LJOY] = false;
             previous[controller::RJOY] = false;
+            //initialize std::map to proper values
+            toEnum["A"] = controller::A;
+            toEnum["B"] = controller::B;
+            toEnum["X"] = controller::X;
+            toEnum["Y"] = controller::Y;
+            toEnum["LBUMPER"] = controller::LBUMPER;
+            toEnum["RBUMPER"] = controller::RBUMPER;
+            toEnum["BACK"] = controller::BACK;
+            toEnum["START"] = controller::START;
+            toEnum["UDPAD"] = controller::UDPAD;
+            toEnum["DDPAD"] = controller::DDPAD;
+            toEnum["LDPAD"] = controller::LDPAD;
+            toEnum["RDPAD"] = controller::RDPAD;
+            toEnum["LTRIG"] = controller::LTRIG;
+            toEnum["RTRIG"] = controller::RTRIG;
+            toEnum["LJOY"] = controller::LJOY;
+            toEnum["RJOY"] = controller::RJOY;
 
         }
 
@@ -183,68 +200,68 @@ class Gamepad{
         //returns the value of the button that is passed as input
         bool button(controller button){
             switch (button){
-                case controller::A:
+                case "A":
                     return this->ButtonA();
                     break;
-                case controller::B:
+                case "B":
                     return this->ButtonB();
                     break;
-               case controller::X:
+               case "X":
                    return this->ButtonX();
                     break;
-                case controller::Y:
+                case "Y":
                     return this->ButtonY();
                     break;
-                case controller::LBUMPER:
+                case "LBUMPER":
                     return this->LeftBumper();
                     break;
-                case controller::RBUMPER:
+                case "RBUMPER":
                     return this->RightBumper();
                     break;
-                case controller::BACK:
+                case "BACK":
                     return this->ButtonBack();
                     break;
-                case controller::START:
+                case "START":
                     return this->ButtonStart();
                     break;
-                case controller::UDPAD:
+                case "UDPAD":
                     if (this->DPad()[1] == 1){
                         return true;
                     } else {
                         return false;
                     }
                     break;
-                case controller::DDPAD:
+                case "DDPAD":
                     if (this->DPad()[1] == -1){
                         return true;
                     } else {
                         return false;
                     }
                     break;
-                case controller::LDPAD:
+                case "LDPAD":
                     if (this->DPad()[0] == -1){
                         return true;
                     } else {
                         return false;
                     }
                     break;
-                case controller::RDPAD:
+                case "RDPAD":
                     if (this->DPad()[0] == 1){
                         return true;
                     } else {
                         return false;
                     }
                     break;
-                case controller::LTRIG:
+                case "LTRIG":
                     return this->LeftTriggerPressed();
                     break;
-                case controller::RTRIG:
+                case "RTRIG":
                     return this->RightTriggerPressed();
                     break;
-                case controller::LJOY:
+                case "LJOY":
                     return this->ButtonLeftJoy();
                     break;
-                case controller::RJOY:
+                case "RJOY":
                     return this->ButtonRightJoy();
                     break;
                 default:
@@ -257,10 +274,10 @@ class Gamepad{
         //returns the value of the trigger that is passed as input
         float trigger(controller hand){
             switch (hand){
-                case controller::LTRIG:
+                case "LTRIG":
                     return this->LeftTriggerValue();
                     break;
-                case controller::RTRIG:
+                case "RTRIG":
                     return this->RightTriggerValue();
                     break;
                 default:
@@ -293,12 +310,15 @@ class Gamepad{
             return up;
         }
 
+        //map controller enum to string keys
+        std::map<std::string, controller> toEnum;
+
+    private:
+
         //current button values
         std::map<controller, bool> current;
         //previous button values
         std::map<controller, bool> previous;
-
-    private:
 
         Joystick* _gamepad;
         float LJoyAxes[2] = {0.0f, 0.0f};

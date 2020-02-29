@@ -21,7 +21,7 @@ class input{
 
     private:
 
-        bool alignment(shuffle::inputChooser controls);
+        bool alignment(int controller, std::string button);
 
         Gamepad *controllerOne;
         Gamepad *controllerTwo;

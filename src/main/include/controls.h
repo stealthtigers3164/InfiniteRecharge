@@ -12,7 +12,7 @@
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/smartdashboard/SmartDashboard.h>
-
+#include <httplib.h>
 #include <Gamepad.h>
 
 class shuffle{
@@ -21,27 +21,12 @@ class shuffle{
 
         shuffle();
 
-        enum driver{
-            ONE,
-            TWO,
-            NONE
+        typedef struct keybind{
+            int controller;
+            std::string button;
         };
 
-        enum mechs{
-            ALIGN,
-            SPINCOLOR,
-            MATCHCOLOR,
-        };
-
-        typedef struct inputChooser{
-            Gamepad::controller button;
-            driver controller;
-        };
-
-        //takes a member from enum shuffle::mech as input
-        //returns the struct shuffle::inputChooser associated with the mechanism
-        //select the mechanism from smartdashboard during runtime
-        inputChooser mechButton(mechs mech);
+        keybind getControl(std::string);
 
     private:
 
@@ -53,117 +38,7 @@ class shuffle{
         std::string m_PrevDriverSelected;
         std::string m_DriverSelected;
 
-        frc::SendableChooser<inputChooser> m_ColorWheel;
-        frc::SendableChooser<inputChooser> m_LimeAutoAlignment;
-        frc::SendableChooser<inputChooser> m_Shooter;
         frc::SendableChooser<std::string> m_Driver;
-        frc::SendableChooser<std::string> m_PrevDriver;
-
-        inputChooser oneA;
-        inputChooser oneB;
-        inputChooser oneX;
-        inputChooser oneY;
-        inputChooser oneLBUMPER;
-        inputChooser oneRBUMPER;
-        inputChooser oneBACK;
-        inputChooser oneSTART;
-        inputChooser oneUDPAD;
-        inputChooser oneDDPAD;
-        inputChooser oneLDPAD;
-        inputChooser oneRDPAD;
-        inputChooser oneLTRIG;
-        inputChooser oneRTRIG;
-        inputChooser oneLJOY;
-        inputChooser oneRJOY;
-        inputChooser twoA;
-        inputChooser twoB;
-        inputChooser twoX;
-        inputChooser twoY;
-        inputChooser twoLBUMPER;
-        inputChooser twoRBUMPER;
-        inputChooser twoBACK;
-        inputChooser twoSTART;
-        inputChooser twoUDPAD;
-        inputChooser twoDDPAD;
-        inputChooser twoLDPAD;
-        inputChooser twoRDPAD;
-        inputChooser twoLTRIG;
-        inputChooser twoRTRIG;
-        inputChooser twoLJOY;
-        inputChooser twoRJOY;
-        inputChooser none;
-
-        const inputChooser buttonsList[33] = {
-            oneA,
-            oneB,
-            oneX,
-            oneY,
-            oneLBUMPER,
-            oneRBUMPER,
-            oneBACK,
-            oneSTART,
-            oneUDPAD,
-            oneDDPAD,
-            oneLDPAD,
-            oneRDPAD,
-            oneLTRIG,
-            oneRTRIG,
-            oneLJOY,
-            oneRJOY,
-            twoA,
-            twoB,
-            twoX,
-            twoY,
-            twoLBUMPER,
-            twoRBUMPER,
-            twoBACK,
-            twoSTART,
-            twoUDPAD,
-            twoDDPAD,
-            twoLDPAD,
-            twoRDPAD,
-            twoLTRIG,
-            twoRTRIG,
-            twoLJOY,
-            twoRJOY,
-            none
-        };
-
-        const std::string names[33] = {
-            "A 1",
-            "B 1",
-            "X 1",
-            "Y 1",
-            "Left Bumper 1",
-            "Right Bumper 1",
-            "Dpad Up 1",
-            "Dpad Down 1",
-            "Dpad Left 1",
-            "Dpad Right 1",
-            "Left Trigger 1",
-            "Right Trigger 1",
-            "Left Joystick Button 1",
-            "Right Joystick Button 1",
-            "Start 1",
-            "Back 1",
-            "A 2",
-            "B 2",
-            "X 2",
-            "Y 2",
-            "Left Bumper 2",
-            "Right Bumper 2",
-            "Dpad Up 2",
-            "Dpad Down 2",
-            "Dpad Left 2",
-            "Dpad Right 2",
-            "Left Trigger 2",
-            "Right Trigger 2",
-            "Left Joystick Button 2",
-            "Right Joystick Button 2",
-            "Start 2",
-            "Back 2",
-            "None"
-        };
 
 };
 

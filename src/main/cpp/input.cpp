@@ -104,13 +104,13 @@ void input::update(){
     */
 }
 
-bool input::alignment(shuffle::inputChooser controls){
-    switch (controls.controller){
-        case shuffle::driver::ONE:
-            return controllerOne->button(controls.button);
+bool input::alignment(int controller, std::string button){
+    switch (controller){
+        case 1:
+            return controllerOne->button(button);
             break;
-        case shuffle::driver::TWO:
-            return controllerTwo->button(controls.button);
+        case 2:
+            return controllerTwo->button(button);
             break;
         default:
             return false;
