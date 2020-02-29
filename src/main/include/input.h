@@ -3,7 +3,6 @@
 #include <limelight.h>
 #include <drive.h>
 #include <color.h>
-
 //input class
 //detects input from controllers using the gamepad wrapper
 
