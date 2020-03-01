@@ -15,11 +15,11 @@
 #include <httplib.h>
 #include <Gamepad.h>
 
-class shuffle{
+class controls{
 
     public:
 
-        shuffle();
+        controls();
 
         typedef struct keybind{
             int controller;
@@ -37,8 +37,10 @@ class shuffle{
         std::string m_autoSelected;
         std::string m_PrevDriverSelected;
         std::string m_DriverSelected;
-
         frc::SendableChooser<std::string> m_Driver;
+
+        httplib::Client client;
+        json11::Json json;
 
 };
 

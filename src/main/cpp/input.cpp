@@ -3,7 +3,7 @@
 #include <drive.h>
 #include <color.h>
 #include <Gamepad.h>
-#include <dashboard.h>
+#include <controls.h>
 #include <math.h>
 #include <iostream>
 //constructor
@@ -22,7 +22,7 @@ input::input(){
     drivechain = new drive(1, 2, 3, 0);
     //color sensor
     cspinner = new color();
-    dash = new shuffle();
+    client = new controls();
 }
 
 void input::update(){
@@ -34,7 +34,7 @@ void input::update(){
     //printf("Right Joystick\n\nX:%f\nY:%f\n\n", RightStick[0], RightStick[1]);
 
     //limelight alignment set to A button
-    if (alignment(dash->mechButton(shuffle::mechs::ALIGN))){
+    if (alignment(client->getControl("limelight")){
         float adjustment = aligner->drive();
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)
@@ -104,13 +104,13 @@ void input::update(){
     */
 }
 
-bool input::alignment(int controller, std::string button){
-    switch (controller){
+bool input::alignment(controls::keybind keybind){
+    switch (keybind.controller){
         case 1:
-            return controllerOne->button(button);
+            return controllerOne->button(keybind.button);
             break;
         case 2:
-            return controllerTwo->button(button);
+            return controllerTwo->button(keybind.button);
             break;
         default:
             return false;

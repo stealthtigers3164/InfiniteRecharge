@@ -28,7 +28,7 @@ class input{
         limelight *aligner;
         drive *drivechain;
         color *cspinner;
-        shuffle *dash;
+        controls *client;
         
         static const int setpoint = 500;
         bool spinToggle = false;

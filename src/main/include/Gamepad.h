@@ -198,70 +198,71 @@ class Gamepad{
 
         //takes a controller enum value as input
         //returns the value of the button that is passed as input
-        bool button(controller button){
+        bool button(std::string b){
+            controller button = this->toEnum[b];
             switch (button){
-                case "A":
+                case controller::A:
                     return this->ButtonA();
                     break;
-                case "B":
+                case controller::B:
                     return this->ButtonB();
                     break;
-               case "X":
+               case controller::X:
                    return this->ButtonX();
                     break;
-                case "Y":
+                case controller::Y:
                     return this->ButtonY();
                     break;
-                case "LBUMPER":
+                case controller::LBUMPER:
                     return this->LeftBumper();
                     break;
-                case "RBUMPER":
+                case controller::RBUMPER:
                     return this->RightBumper();
                     break;
-                case "BACK":
+                case controller::BACK:
                     return this->ButtonBack();
                     break;
-                case "START":
+                case controller::START:
                     return this->ButtonStart();
                     break;
-                case "UDPAD":
+                case controller::UDPAD:
                     if (this->DPad()[1] == 1){
                         return true;
                     } else {
                         return false;
                     }
                     break;
-                case "DDPAD":
+                case controller::DDPAD:
                     if (this->DPad()[1] == -1){
                         return true;
                     } else {
                         return false;
                     }
                     break;
-                case "LDPAD":
+                case controller::LDPAD:
                     if (this->DPad()[0] == -1){
                         return true;
                     } else {
                         return false;
                     }
                     break;
-                case "RDPAD":
+                case controller::RDPAD:
                     if (this->DPad()[0] == 1){
                         return true;
                     } else {
                         return false;
                     }
                     break;
-                case "LTRIG":
+                case controller::LTRIG:
                     return this->LeftTriggerPressed();
                     break;
-                case "RTRIG":
+                case controller::RTRIG:
                     return this->RightTriggerPressed();
                     break;
-                case "LJOY":
+                case controller::LJOY:
                     return this->ButtonLeftJoy();
                     break;
-                case "RJOY":
+                case controller::RJOY:
                     return this->ButtonRightJoy();
                     break;
                 default:
@@ -274,10 +275,10 @@ class Gamepad{
         //returns the value of the trigger that is passed as input
         float trigger(controller hand){
             switch (hand){
-                case "LTRIG":
+                case controller::LTRIG:
                     return this->LeftTriggerValue();
                     break;
-                case "RTRIG":
+                case controller::RTRIG:
                     return this->RightTriggerValue();
                     break;
                 default:
