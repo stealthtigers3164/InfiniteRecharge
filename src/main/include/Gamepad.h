@@ -198,8 +198,7 @@ class Gamepad{
 
         //takes a controller enum value as input
         //returns the value of the button that is passed as input
-        bool button(std::string b){
-            controller button = this->toEnum[b];
+        bool button(controller button){
             switch (button){
                 case controller::A:
                     return this->ButtonA();

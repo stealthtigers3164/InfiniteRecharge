@@ -3,7 +3,7 @@
 #include <limelight.h>
 #include <drive.h>
 #include <color.h>
-#include <dashboard.h>
+#include <controls.h>
 
 //input class
 //detects input from controllers using the gamepad wrapper
@@ -21,7 +21,7 @@ class input{
 
     private:
 
-        bool alignment(int controller, std::string button);
+        bool alignment(controls::keybind keybind);
 
         Gamepad *controllerOne;
         Gamepad *controllerTwo;

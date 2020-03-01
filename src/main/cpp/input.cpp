@@ -34,7 +34,7 @@ void input::update(){
     //printf("Right Joystick\n\nX:%f\nY:%f\n\n", RightStick[0], RightStick[1]);
 
     //limelight alignment set to A button
-    if (alignment(client->getControl("limelight")){
+    if (alignment(client->getControl("limelight"))){
         float adjustment = aligner->drive();
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)
@@ -107,10 +107,10 @@ void input::update(){
 bool input::alignment(controls::keybind keybind){
     switch (keybind.controller){
         case 1:
-            return controllerOne->button(keybind.button);
+            return controllerOne->button(controllerOne->toEnum[keybind.button]);
             break;
         case 2:
-            return controllerTwo->button(keybind.button);
+            return controllerTwo->button(controllerTwo->toEnum[keybind.button]);
             break;
         default:
             return false;
