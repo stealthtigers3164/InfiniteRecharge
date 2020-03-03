@@ -5,13 +5,17 @@
 #include <frc/smartdashboard/SmartDashboard.h>
 
 color::color(){
+    printf("Default color wheel constuctor -- do not use");
+}
+
+color::color(int port){
     m_colorMatcher.AddColorMatch(kBlueTarget);
     m_colorMatcher.AddColorMatch(kGreenTarget);
     m_colorMatcher.AddColorMatch(kRedTarget);
     m_colorMatcher.AddColorMatch(kYellowTarget);
     frc::SmartDashboard::PutNumber("Color", 0);
     //set motor to specific port
-    motor = new frc::Spark(5);
+    motor = new frc::Spark(port);
 
     //init spin variables
     previousColor = 0;

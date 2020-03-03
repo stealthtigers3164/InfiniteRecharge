@@ -12,7 +12,8 @@ class color {
 
         public:
 
-        color(); 
+        color();
+        color(int port);
         bool spin(); 
         bool matchColor(); 
         void resetSpin(); 
