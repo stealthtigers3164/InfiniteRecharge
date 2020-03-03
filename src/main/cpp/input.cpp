@@ -2,6 +2,7 @@
 #include <limelight.h>
 #include <drive.h>
 #include <color.h>
+#include <lift.h>
 #include <Gamepad.h>
 #include <controls.h>
 #include <math.h>
@@ -13,16 +14,21 @@ input::input(){
     //one/two controllers -> choose through smartdashboard??
     controllerOne = new Gamepad(0);
     controllerTwo = new Gamepad(1);
-    //limelight code
-    aligner = new limelight();
+    //control picker client
+    client = new controls();
     //ports may change with comp. robot
     //BL, FL, FR, BR
     // GOL:                6, 7, 9, 8
     // Winchless:          1, 2, 3, 0
     drivechain = new drive(1, 2, 3, 0);
+    //limelight code
+    aligner = new limelight();
+    //lift for end-game climb
+    //temporary ports
+    //actual ports TBD
+    climb = new lift(4, 7);
     //color sensor
-    cspinner = new color();
-    client = new controls();
+    cspinner = new color(5);
 }
 
 void input::update(){
@@ -55,6 +61,15 @@ void input::update(){
         // Winchless:   right *= -1;
         right *= -1;
         drivechain->update(left, right);
+    }
+
+    //climb code
+    if(button(client->getControl("lift up"))){
+        climb->update(1.0f);
+    } else if (button(client->getControl("lift down"))){
+        climb->update(-1.0f);
+    } else {
+        climb->update(0.0f);
     }
 
     if (controllerOne->getButtonDown(Gamepad::controller::X)){

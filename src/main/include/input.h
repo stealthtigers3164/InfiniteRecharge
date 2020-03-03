@@ -2,6 +2,7 @@
 #include <Gamepad.h>
 #include <limelight.h>
 #include <drive.h>
+#include <lift.h>
 #include <color.h>
 #include <controls.h>
 
@@ -27,10 +28,12 @@ class input{
 
         Gamepad *controllerOne;
         Gamepad *controllerTwo;
-        limelight *aligner;
-        drive *drivechain;
-        color *cspinner;
         controls *client;
+        drive *drivechain;
+        limelight *aligner;
+        lift* climb;
+        color *cspinner;
+        
         
         static const int setpoint = 500;
         bool spinToggle = false;
