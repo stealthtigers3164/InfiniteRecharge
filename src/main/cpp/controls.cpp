@@ -1,5 +1,7 @@
 #include <controls.h>
+// https://github.com/yhirose/cpp-httplib
 #include <httplib.h>
+// https://github.com/dropbox/json11
 #include <json11.hpp>
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/smartdashboard/SmartDashboard.h>
