@@ -21,7 +21,9 @@ class input{
 
     private:
 
-        bool alignment(controls::keybind keybind);
+        bool button(controls::keybind keybind);
+        bool buttonDown(controls::keybind keybind);
+        bool buttonUp(controls::keybind keybind);
 
         Gamepad *controllerOne;
         Gamepad *controllerTwo;

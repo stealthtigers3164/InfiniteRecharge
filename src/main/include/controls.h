@@ -13,6 +13,7 @@
 #include <frc/smartdashboard/SendableChooser.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <httplib.h>
+#include <json11.hpp>
 #include <Gamepad.h>
 
 class controls{
@@ -43,20 +44,3 @@ class controls{
         json11::Json json;
 
 };
-
-/*
-void DashboardCheck(){
-    m_DriverSelected = m_Driver.GetSelected();
-    if (m_PrevDriverSelected != m_DriverSelected){
-        if (m_DriverSelected == "Driver1"){
-            m_Shooter.SetDefaultOption("Y", oneY);
-            frc::SmartDashboard::PutData("Shooter", &m_Shooter);
-        }
-        else if (m_DriverSelected == "Driver2"){
-            m_Shooter.SetDefaultOption("X", oneX);
-            frc::SmartDashboard::PutData("Shooter", &m_Shooter);
-        }
-    }
-    m_PrevDriverSelected = m_DriverSelected;
-}
-*/

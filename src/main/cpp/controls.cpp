@@ -42,7 +42,7 @@ controls::controls(){
 controls::keybind controls::getControl(std::string mech){
     keybind result;
     result.controller = 0;
-    result.button = "NONE";
+    result.button = "none";
     try{
         char* buttonRequest = "/?driver=Default&req=limelight&mode=0";
         // char* buttonRequest = "/?driver=";
