@@ -5,8 +5,6 @@ class intake{
 
     private:
 
-        //motor for angler
-        frc::Spark *angler;
         //motor for roller
         frc::Spark *roller;
 
@@ -15,10 +13,7 @@ class intake{
         //default constructor -- do not use
         intake();
         //assign ports to motor objects
-        intake(int portAngler, int portRoller);
-        //update angle of angler
-        //limit switch??
-        void angle(bool toggle);
+        intake(int portRoller);
         //toggle roller (on/off)
         void roll(bool toggle);
 

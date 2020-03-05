@@ -1,4 +1,7 @@
 #include <input.h>
+#include <intake.h>
+#include <shooter.h>
+#include <indexer.h>
 #include <limelight.h>
 #include <drive.h>
 #include <color.h>
@@ -7,6 +10,7 @@
 #include <controls.h>
 #include <math.h>
 #include <iostream>
+
 //constructor
 input::input(){
     //possibly add second gamepad
@@ -20,9 +24,14 @@ input::input(){
     //BL, FL, FR, BR
     // GOL:                6, 7, 9, 8
     // Winchless:          1, 2, 3, 0
-    drivechain = new drive(1, 2, 3, 0);
+    drivechain = new drive(0, 1, 2, 3);
     //limelight code
     aligner = new limelight();
+    //intake motor
+    roller = new intake(2);
+    //turret and flywheel
+    //turret is first port, flywheel is second port
+    turret = new shooter(0, 1);
     //lift for end-game climb
     //temporary ports
     //actual ports TBD

@@ -26,13 +26,15 @@ class input{
         bool buttonDown(controls::keybind keybind);
         bool buttonUp(controls::keybind keybind);
 
-        Gamepad *controllerOne;
-        Gamepad *controllerTwo;
-        controls *client;
-        drive *drivechain;
-        limelight *aligner;
+        Gamepad* controllerOne;
+        Gamepad* controllerTwo;
+        controls*client;
+        drive* drivechain;
+        limelight* aligner;
+        intake* roller;
+        shooter* turret;
         lift* climb;
-        color *cspinner;
+        color* cspinner;
         
         
         static const int setpoint = 500;
