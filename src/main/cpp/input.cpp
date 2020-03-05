@@ -27,8 +27,9 @@ input::input(){
     drivechain = new drive(0, 1, 2, 3);
     //limelight code
     aligner = new limelight();
-    //intake motor
-    roller = new intake(2);
+    //intake motors
+    //roller motor
+    roller = new intake(2, 3);
     //turret and flywheel
     //turret is first port, flywheel is second port
     turret = new shooter(0, 1);
