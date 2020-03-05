@@ -29,14 +29,14 @@ input::input(){
     aligner = new limelight();
     //intake motors
     //roller motor
-    roller = new intake(2, 3);
+    roller = new intake(2, 3, 4, 5);
     //turret and flywheel
     //turret is first port, flywheel is second port
-    turret = new shooter(0, 1);
+    turret = new shooter(4, 5);
     //lift for end-game climb
     //temporary ports
     //actual ports TBD
-    climb = new lift(4, 7);
+    climb = new lift(0, 1);
     //color sensor
     cspinner = new color(5);
 }

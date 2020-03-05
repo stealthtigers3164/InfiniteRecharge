@@ -1,4 +1,5 @@
 #include <frc/Victor.h>
+#include <frc/DigitalInput.h>
 #include <indexer.h>
 
 //default constructor -- do not use
