@@ -1,0 +1,84 @@
+package org.usfirst.frc.team2509.robot;
+
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.CANTalon;
+
+
+public class Robot extends IterativeRobot {
+	RobotDrive myRobot;
+	Joystick stick;
+	Joystick rstick;
+	int autoLoopCounter;
+	Encoder enc;
+	DriverStation ds = DriverStation.getInstance();
+	Talon motor1 = new Talon(0);
+    Talon motor2 = new Talon(1);
+    Talon motor3 = new Talon(2);
+    Talon motor4 = new Talon(3);
+    CANTalon winch = new CANTalon(0);
+    CANTalon jack = new CANTalon(1);
+    CANTalon belt = new CANTalon(2);
+    CANTalon arm = new CANTalon(3);
+    CANTalon sciccors = new CANTalon(4);
+    CANTalon shooter = new CANTalon(5);
+        
+    public void robotInit() {
+    	myRobot = new RobotDrive(motor1, motor2, motor3, motor4);
+    	stick = new Joystick(0);
+    	rstick = new Joystick(1);
+    	    	
+    }
+    
+    /**
+     * This function is run once each time the robot enters autonomous mode
+     */
+    public void autonomousInit() {
+    	autoLoopCounter = 0;
+    	
+    }
+
+    /**
+     * This function is called periodically during autonomous
+     */
+    public void autonomousPeriodic() {
+    	if(autoLoopCounter < 50) //Check if we've completed 100 loops (approximately 2 seconds)
+		{
+			myRobot.drive(-0.5, 0.0); 	// drive forwards half speed
+			autoLoopCounter++;
+			} else {
+			myRobot.drive(0.0, 0.0); 	// stop robot
+		}
+    	
+    }
+    
+    /**
+     * This function is called once each time the robot enters tele-operated mode
+     */
+    public void teleopInit(){
+    	enc.start();
+    	
+    }
+
+    /**
+     * This function is called periodically during operator control
+     */
+    public void teleopPeriodic() {
+        myRobot.tankDrive(stick, rstick);
+        stick.getRawButton(1);
+        }
+    
+    /**
+     * This function is called periodically during test mode
+     */
+    public void testPeriodic() {
+    	LiveWindow.run();
+    	
+    }
+    
+}

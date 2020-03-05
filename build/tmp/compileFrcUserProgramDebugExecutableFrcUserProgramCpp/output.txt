@@ -1,0 +1,49 @@
+See file:///C:/Users/Robotics/Desktop/Thur/InfiniteRecharge/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt for all output for compileFrcUserProgramDebugExecutableFrcUserProgramCpp.
+compiling limelight.cpp successful.
+
+compiling drive.cpp successful.
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp\drive.cpp: In member function 'int drive::update(float, float)':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp\drive.cpp:25:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+
+compiling input.cpp successful.
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp\input.cpp: In member function 'void input::update()':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp\input.cpp:13:12: warning: unused variable 'LeftStick' [-Wunused-variable]
+     float* LeftStick = controller->LeftJoystick();
+            ^~~~~~~~~
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp\input.cpp:14:12: warning: unused variable 'RightStick' [-Wunused-variable]
+     float* RightStick = controller->RightJoystick();
+            ^~~~~~~~~~
+
+compiling Robot.cpp failed.
+In file included from C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp\Robot.cpp:18:0:
+c:\users\robotics\desktop\thur\infiniterecharge\src\main\include\colour.h: In function 'void buttonCheck()':
+c:\users\robotics\desktop\thur\infiniterecharge\src\main\include\colour.h:202:24: error: 'Gamepad* input::controller' is private within this context
+             if (input::controller->ButtonA()){
+                        ^~~~~~~~~~
+In file included from C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\include/Robot.h:15:0,
+                 from C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp\Robot.cpp:8:
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\include/input.h:23:18: note: declared private here
+         Gamepad *controller;
+                  ^~~~~~~~~~
+In file included from C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp\Robot.cpp:18:0:
+c:\users\robotics\desktop\thur\infiniterecharge\src\main\include\colour.h:202:24: error: invalid use of non-static data member 'input::controller'
+             if (input::controller->ButtonA()){
+                        ^~~~~~~~~~
+In file included from C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\include/Robot.h:15:0,
+                 from C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp\Robot.cpp:8:
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\include/input.h:23:18: note: declared here
+         Gamepad *controller;
+                  ^~~~~~~~~~
+In file included from C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp\Robot.cpp:18:0:
+c:\users\robotics\desktop\thur\infiniterecharge\src\main\include\colour.h:203:18: error: 'colourWheel' was not declared in this scope
+                  colourWheel();
+                  ^~~~~~~~~~~
+In file included from C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp\Robot.cpp:18:0:
+c:\users\robotics\desktop\thur\infiniterecharge\src\main\include\colour.h: In function 'int readColour()':
+c:\users\robotics\desktop\thur\infiniterecharge\src\main\include\colour.h:81:5: warning: control reaches end of non-void function [-Wreturn-type]
+     }
+     ^
+
+Finished compileFrcUserProgramDebugExecutableFrcUserProgramCpp, see full log file:///C:/Users/Robotics/Desktop/Thur/InfiniteRecharge/build/tmp/compileFrcUserProgramDebugExecutableFrcUserProgramCpp/output.txt.

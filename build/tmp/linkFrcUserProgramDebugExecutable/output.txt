@@ -1,0 +1,67 @@
+See file:///C:/Users/Robotics/Desktop/Thur/InfiniteRecharge/build/tmp/linkFrcUserProgramDebugExecutable/output.txt for all output for linkFrcUserProgramDebugExecutable.
+linking frcUserProgram failed.
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o:(.bss+0x50): multiple definition of `m_colorSensor'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:(.bss+0x50): first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `frc::Error::~Error()':
+c:\users\public\wpilib\2020\roborio\arm-frc2020-linux-gnueabi\usr\include\c++\7.3.0/iostream:74: multiple definition of `m_colorMatcher'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:c:\users\public\wpilib\2020\roborio\arm-frc2020-linux-gnueabi\usr\include\c++\7.3.0/iostream:74: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_move(char*, char const*, unsigned int)':
+c:\users\public\wpilib\2020\roborio\arm-frc2020-linux-gnueabi\usr\include\c++\7.3.0/iostream:74: multiple definition of `motor'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/Robot.cpp:90: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `std::char_traits<char>::copy(char*, char const*, unsigned int)':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/input.cpp:44: multiple definition of `gameData[abi:cxx11]'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/Robot.cpp:90: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `declaration()':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\include/colour.h:42: multiple definition of `declaration()'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:c:\users\robotics\desktop\thur\infiniterecharge\src\main\include/colour.h:42: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `buttonCheck()':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\include/colour.h:191: multiple definition of `buttonCheck()'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:c:\users\robotics\desktop\thur\infiniterecharge\src\main\include/colour.h:191: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/input.cpp:44: multiple definition of `targetColour'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/Robot.cpp:90: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_dispose()':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/input.cpp:44: multiple definition of `previousColour'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/Robot.cpp:90: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `std::char_traits<char>::copy(char*, char const*, unsigned int)':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/input.cpp:44: multiple definition of `currentColour'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/Robot.cpp:87: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_M_data() const':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/input.cpp:44: multiple definition of `rotationCount'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/Robot.cpp:85: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `__gnu_cxx::new_allocator<char>::deallocate(char*, unsigned int)':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/input.cpp:44: multiple definition of `numberOfRotation'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/Robot.cpp:83: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_move(char*, char const*, unsigned int)':
+c:\users\public\wpilib\2020\roborio\arm-frc2020-linux-gnueabi\usr\include\c++\7.3.0/iostream:74: multiple definition of `targetBlue'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/Robot.cpp:90: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_move(char*, char const*, unsigned int)':
+c:\users\public\wpilib\2020\roborio\arm-frc2020-linux-gnueabi\usr\include\c++\7.3.0/iostream:74: multiple definition of `targetGreen'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/Robot.cpp:90: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_move(char*, char const*, unsigned int)':
+c:\users\public\wpilib\2020\roborio\arm-frc2020-linux-gnueabi\usr\include\c++\7.3.0/iostream:74: multiple definition of `targetRed'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/Robot.cpp:90: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_S_move(char*, char const*, unsigned int)':
+c:\users\public\wpilib\2020\roborio\arm-frc2020-linux-gnueabi\usr\include\c++\7.3.0/iostream:74: multiple definition of `targetYellow'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/Robot.cpp:90: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `__gnu_cxx::new_allocator<char>::deallocate(char*, unsigned int)':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/input.cpp:44: multiple definition of `buttonAWP'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/Robot.cpp:83: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `readColour()':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\include/colour.h:54: multiple definition of `readColour()'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:c:\users\robotics\desktop\thur\infiniterecharge\src\main\include/colour.h:54: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `spin()':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\include/colour.h:91: multiple definition of `spin()'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:c:\users\robotics\desktop\thur\infiniterecharge\src\main\include/colour.h:91: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `std::char_traits<char>::copy(char*, char const*, unsigned int)':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/input.cpp:44: multiple definition of `speed'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\cpp/Robot.cpp:87: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `detectColour()':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\include/colour.h:105: multiple definition of `detectColour()'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:c:\users\robotics\desktop\thur\infiniterecharge\src\main\include/colour.h:105: first defined here
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\cvfxnskxk5wjdoynnko6arfvf\input.o: In function `colourWheel()':
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\src\main\include/colour.h:203: multiple definition of `colourWheel()'
+C:\Users\Robotics\Desktop\Thur\InfiniteRecharge\build\objs\frcUserProgram\debug\frcUserProgramCpp\3bg5a77l7vd4edmrxq5jco6ri\Robot.o:c:\users\robotics\desktop\thur\infiniterecharge\src\main\include/colour.h:203: first defined here
+collect2.exe: error: ld returned 1 exit status
+
+Finished linkFrcUserProgramDebugExecutable, see full log file:///C:/Users/Robotics/Desktop/Thur/InfiniteRecharge/build/tmp/linkFrcUserProgramDebugExecutable/output.txt.
