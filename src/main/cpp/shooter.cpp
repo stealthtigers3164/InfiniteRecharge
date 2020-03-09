@@ -8,11 +8,12 @@ shooter::shooter(){
 
 shooter::shooter(int pTurret, int pFlywheel){
     mTurret = new TalonSRX(pTurret);
-    mFlywheel = new TalonSRX(pFlywheel);
+    mFlywheel = new TalonSRX(6);
 }
 
 void shooter::updateTurret(float power){
     mTurret->Set(ControlMode::PercentOutput, power);
+    mFlywheel->Set(ControlMode::PercentOutput, 1);
 }
 
 void shooter::updateFlywheel(float setpoint){
