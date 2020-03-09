@@ -11,6 +11,7 @@ indexer::indexer(){
 indexer::indexer(int pOne, int pTwo){
     vOne = new frc::Victor(pOne);
     vTwo = new frc::Victor(pTwo);
+    forwardLimitSwitch = new frc::DigitalInput(1);
 }
 
 //takes a range from -1 to 1
@@ -19,4 +20,11 @@ indexer::indexer(int pOne, int pTwo){
 void indexer::update(float power){
     vOne->Set(power);
     vTwo->Set(power);
+}
+
+int indexer::countIndex(){
+    if((prevSwitcher != switcher) && switcher){ 
+        balls++;
+    }
+    prevSwitcher = switcher;
 }
