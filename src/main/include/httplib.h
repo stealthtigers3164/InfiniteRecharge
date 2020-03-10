@@ -558,7 +558,6 @@ private:
 
 class Client {
 public:
-  virtual Client();
 
   explicit Client(const std::string &host, int port = 80,
                   const std::string &client_cert_path = std::string(),
@@ -3563,8 +3562,6 @@ inline bool Server::process_and_close_socket(socket_t sock) {
 }
 
 // HTTP client implementation
-inline Client::Client() {}
-
 inline Client::Client(const std::string &host, int port,
                       const std::string &client_cert_path,
                       const std::string &client_key_path)

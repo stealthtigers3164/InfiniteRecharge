@@ -30,9 +30,9 @@ controls::controls(){
     frc::SmartDashboard::PutString("Button", "A");
 
     try{
-        httplib::Client client(frc::SmartDashboard::GetString("Host", "172.20.10.2"), 5802);
+        // httplib::Client client(frc::SmartDashboard::GetString("Host", "172.20.10.2"), 5802);
 
-        httplib::Client client("172.20.10.2", 5802);
+        client = new httplib::Client("172.20.10.2", 5802);
     } catch (...){
         std::string err = "parse failed";
         std::ifstream t("/home/lvuser/defaults.json");
@@ -58,8 +58,8 @@ controls::keybind controls::getControl(std::string mech){
         // controllerRequest += (char)"&req=";
         // controllerRequest += (char)(mech).c_str();
         // controllerRequest += (char)"&mode=1";
-        auto buttonResponse = client.Get(buttonRequest);
-        auto controllerResponse = client.Get(controllerRequest);
+        auto buttonResponse = client->Get(buttonRequest);
+        auto controllerResponse = client->Get(controllerRequest);
         if(buttonResponse && buttonResponse->status == 200){
             result.button = buttonResponse->body;
         }

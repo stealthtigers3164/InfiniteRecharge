@@ -27,7 +27,7 @@ class controls{
         typedef struct keybind{
             int controller;
             std::string button;
-        };
+        } keybind;
 
         keybind getControl(std::string);
 
@@ -42,7 +42,7 @@ class controls{
         std::string m_DriverSelected;
         frc::SendableChooser<std::string> m_Driver;
 
-        httplib::Client client;
+        httplib::Client* client;
         json11::Json json;
 
 };

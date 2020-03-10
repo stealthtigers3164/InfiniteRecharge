@@ -3,6 +3,8 @@
 #include <limelight.h>
 #include <drive.h>
 #include <lift.h>
+#include <intake.h>
+#include <shooter.h>
 #include <color.h>
 #include <controls.h>
 

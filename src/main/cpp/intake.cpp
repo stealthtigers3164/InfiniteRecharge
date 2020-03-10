@@ -34,9 +34,9 @@ void intake::roll(bool toggle){
 }
 
 bool intake::upperLimit(){
-    return upperLimit->get();
+    return switchUp->Get();
 }
 
 bool intake::lowerLimit(){
-    return lowerLimit->get();
+    return switchDown->Get();
 }
