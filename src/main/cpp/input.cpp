@@ -89,15 +89,21 @@ void input::update(){
 
     //IF ANY OF THE TWO BUMPERS, ACTIVATE THE FLYWHEEL
     if(controllerTwo->RightBumper() || controllerTwo->LeftBumper()){
-        fly->flyyWheel(1);
+        fly->flyWheel(1);
+        if (fly->rpm() > 50){
+            indx->update(0.5);
+        } else {
+            indx->update(0);
+        }
     }else{
-        fly->flyyWheel(0);
+        fly->flyWheel(0);
+        indx->update(0);
     }
 
     
     bool leftTwo = controllerTwo->LeftTriggerPressed();
     bool rightTwo = controllerTwo->RightTriggerPressed();
-    //IF left is pressed but NOT right, set both 'indexers' at 0.3
+    //IF left is pressed but NOT right, set both 'indexers' at 0.5
     if(leftTwo && !rightTwo){
         indx->update(0.5);
     }
@@ -105,7 +111,7 @@ void input::update(){
     if((!leftTwo && !rightTwo) || (leftTwo && rightTwo)){
         indx->update(0);
     }
-    //IF right is pressed but not left, set both 'indexers' to -0.3
+    //IF right is pressed but not left, set both 'indexers' to -0.5
     if(!leftTwo && rightTwo){
         indx->update(-0.5);
     }

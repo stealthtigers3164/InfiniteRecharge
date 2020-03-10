@@ -31,7 +31,7 @@ class shooter{
         void updateFlywheel(float setpoint);
         //returns rpm as a float
         float rpm();
-        
-        void flyyWheel(float setpoint);
+        //set the flywheel to the specified power
+        void flyWheel(float power);
 
 };

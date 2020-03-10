@@ -38,9 +38,10 @@ void shooter::updateFlywheel(float setpoint){
     mFlywheel->Set(ControlMode::PercentOutput, tbhPow);
 }
 
-void shooter::flyyWheel(float setpoint){
-    mFlywheel->Set(ControlMode::PercentOutput, setpoint);
+void shooter::flyWheel(float power){
+    mFlywheel->Set(ControlMode::PercentOutput, power);
 }
+
 //returns the rpm of the flywheel motor
 float shooter::rpm(){
     //ticks per 100 milliseconds
