@@ -5,6 +5,9 @@
 #include <Gamepad.h>
 #include <math.h>
 #include <iostream>
+#include <shooter.h>
+#include <indexer.h>
+#include <lift.h>
 
 //constructor
 input::input(){
@@ -19,9 +22,16 @@ input::input(){
     //BL, FL, FR, BR
     // GOL:                6, 7, 9, 8
     // Winchless:          1, 2, 3, 0
-    drivechain = new drive(6, 7, 9, 8);
+    //Dankenstein:         5, 8, 0, 1
+    drivechain = new drive(5, 8, 0, 1);
     //color sensor
     cspinner = new color();
+    //FlyWheel
+    fly = new shooter(6);
+    //indexer
+    indx = new indexer(4,2,0);
+    //Lift/Elevator
+    //lifft = new lift();
 }
 
 void input::update(){
@@ -34,6 +44,7 @@ void input::update(){
 
     //limelight alignment set to A button
     if (controllerOne->ButtonA()){
+        aligner->setCamera(0);
         float adjustment = aligner->drive();
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)
@@ -47,6 +58,7 @@ void input::update(){
     } else {
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)
+        aligner->setCamera(1);
         float left = std::abs(LeftStick[1]) * LeftStick[1];
         float right = std::abs(RightStick[1]) * RightStick[1];
         //motors flipped
@@ -55,7 +67,8 @@ void input::update(){
         left *= -1;
         drivechain->update(left, right);
     }
-
+    //NOT USING COLOUR WHEEL IN ORLANDO
+    /*
     if (controllerOne->getButtonDown(Gamepad::controller::X)){
         spinToggle = !spinToggle;
     }
@@ -70,35 +83,41 @@ void input::update(){
     }
     if (matchToggle){
         matchToggle = cspinner->matchColor();
+    }*/ 
+
+    //IF ANY OF THE TWO BUMPERS, ACTIVATE THE FLYWHEEL
+    if(controllerTwo->RightBumper() || controllerTwo->LeftBumper()){
+        fly->flyyWheel(1);
+    }else{
+        fly->flyyWheel(0);
     }
 
-    //pseudo code
-    /*
-
-    if (button down){
-        limelight::turret();
-    } else {
-        float pow;
-        if (button for left){
-            pow -= 0.5f;
-        }
-        if (button for right){
-            pow += 0.5f;
-        }
-        shooter::updateTurret(pow);
+    
+    bool leftTwo = controllerTwo->LeftTriggerPressed();
+    bool rightTwo = controllerTwo->RightTriggerPressed();
+    //IF left is pressed but NOT right, set both 'indexers' at 0.3
+    if(leftTwo && !rightTwo){
+        indx->update(0.3);
+    }
+    //IF NEITHER of them are pressed or BOTH are pressed, set both 'indexers' to 0
+    if((!leftTwo && !rightTwo) || (leftTwo && rightTwo)){
+        indx->update(0);
+    }
+    //IF right is pressed but not left, set both 'indexers' to -0.3
+    if(!leftTwo && rightTwo){
+        indx->update(-0.3);
     }
 
-    if (button down){
-        //change setpoint to desired rpm
-        shooter::updateFlywheel(setpoint);
-        if (rpm == setpoint){
-            //shoot one ball
-            indexer::shoot();
-        } else {
-            //set flywheel to zero speed
-            shooter::updateFlywheel(0);
-        }
+    //LIFT/ELEVATOR
+    /*float leftOne = controllerTwo->LeftTriggerValue();
+    float rightOne = controllerTwo->LeftTriggerValue();
+    if(leftOne != 0.1){
+        lifft->update(leftOne);
     }
-
-    */
+    if(rightOne != 0.1){
+        lifft->update(-rightOne);
+    }
+    if(leftOne != 0.1 && rightOne != 0.1){
+        lifft->update(0);
+    }*/
 }

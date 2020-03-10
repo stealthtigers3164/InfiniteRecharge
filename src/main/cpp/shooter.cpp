@@ -6,13 +6,13 @@ shooter::shooter(){
     printf("default shooter constructor -- do not use");
 }
 
-shooter::shooter(int pTurret, int pFlywheel){
-    mTurret = new TalonSRX(pTurret);
-    mFlywheel = new TalonSRX(6);
+shooter::shooter(int pFlywheel){
+    //mTurret = new TalonSRX(pTurret);
+    mFlywheel = new TalonSRX(pFlywheel);
 }
 
 void shooter::updateTurret(float power){
-    mTurret->Set(ControlMode::PercentOutput, power);
+    //mTurret->Set(ControlMode::PercentOutput, power);
     mFlywheel->Set(ControlMode::PercentOutput, 1);
 }
 
@@ -38,6 +38,9 @@ void shooter::updateFlywheel(float setpoint){
     mFlywheel->Set(ControlMode::PercentOutput, tbhPow);
 }
 
+void shooter::flyyWheel(float setpoint){
+    mFlywheel->Set(ControlMode::PercentOutput, setpoint);
+}
 //returns the rpm of the flywheel motor
 float shooter::rpm(){
     //ticks per 100 milliseconds

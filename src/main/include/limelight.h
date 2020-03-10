@@ -33,4 +33,5 @@ class limelight{
         //add turret() method
         //turret alignment instead of drive alignment
         //change all calls to the update() method to the drive() method
+    void setCamera(int mode);
 };

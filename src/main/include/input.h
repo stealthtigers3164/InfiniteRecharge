@@ -3,6 +3,9 @@
 #include <limelight.h>
 #include <drive.h>
 #include <color.h>
+#include <shooter.h>
+#include <indexer.h>
+#include <lift.h>
 //input class
 //detects input from controllers using the gamepad wrapper
 
@@ -24,6 +27,9 @@ class input{
         limelight *aligner;
         drive *drivechain;
         color *cspinner;
+        shooter *fly;
+        indexer *indx;
+        lift *lifft;
         
         static const int setpoint = 500;
         bool spinToggle = false;

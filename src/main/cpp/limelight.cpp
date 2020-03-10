@@ -45,6 +45,19 @@ float limelight::drive(){
     return steering_adjust;// + distance_adjust;
 }
 
+
+void setCamera(int mode){
+    std::shared_ptr<NetworkTable> table =  nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+    if(mode == 0){
+        table->PutNumber("camMode", 0);
+        table->PutNumber("ledMode", 3);
+    }else{
+        table->PutNumber("camMode", 1);
+        table->PutNumber("ledMode", 1);
+    }
+}
+
+
 //deprecated
 /*
 float limelight::turret(){

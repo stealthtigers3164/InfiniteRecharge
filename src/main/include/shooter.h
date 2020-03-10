@@ -22,7 +22,7 @@ class shooter{
         //default constructor -- do not use
         shooter();
         //constructor to define motor ports
-        shooter(int pTurret, int pFlywheel);
+        shooter(int pFlywheel);
         //set turret power to rotate turret
         //will not rotate if limitswitch is pressed -- todo
         void updateTurret(float power);
@@ -31,5 +31,7 @@ class shooter{
         void updateFlywheel(float setpoint);
         //returns rpm as a float
         float rpm();
+        
+        void flyyWheel(float setpoint);
 
 };

@@ -36,4 +36,11 @@ class Robot : public frc::TimedRobot {
   std::string m_autoSelected;
 
   frc::Spark *motor;
+
+  frc::Timer *timer;
+
+  indexer *indx;
+  shooter *fly;
+
+  drive *driver;
 };

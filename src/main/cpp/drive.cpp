@@ -11,11 +11,11 @@ drive::drive(){
     std::cout << "WARNING! No ports defined for drive class constructor." <<  std::endl;
 }
 
-drive::drive(int backLeft, int frontLeft, int frontRight, int backRight){
-    m_frontLeft = new WPI_VictorSPX(5);
-    m_frontRight = new WPI_VictorSPX(8);
-    m_backLeft = new WPI_VictorSPX(0);
-    m_backRight = new WPI_VictorSPX(1);
+drive::drive(int frontLeft, int frontRight, int backLeft, int backRight){
+    m_frontLeft = new WPI_VictorSPX(frontLeft);
+    m_frontRight = new WPI_VictorSPX(frontRight);
+    m_backLeft = new WPI_VictorSPX(backLeft);
+    m_backRight = new WPI_VictorSPX(backRight);
 } 
 
 void drive::update(float left, float right){
