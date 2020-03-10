@@ -1,6 +1,7 @@
 #pragma once
 #include <frc/DigitalInput.h>
 #include <ctre/Phoenix.h>
+#include <frc/Spark.h>
 
 class indexer{
 

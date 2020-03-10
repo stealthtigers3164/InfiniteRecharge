@@ -6,6 +6,7 @@
 #include <shooter.h>
 #include <indexer.h>
 #include <lift.h>
+#include <intake.h>
 //input class
 //detects input from controllers using the gamepad wrapper
 
@@ -30,6 +31,7 @@ class input{
         shooter *fly;
         indexer *indx;
         lift *lifft;
+        intake *intaker;
         
         static const int setpoint = 500;
         bool spinToggle = false;

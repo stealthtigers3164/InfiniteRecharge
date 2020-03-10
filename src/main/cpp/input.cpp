@@ -29,9 +29,11 @@ input::input(){
     //FlyWheel
     fly = new shooter(6);
     //indexer
-    indx = new indexer(4,2,0);
+    indx = new indexer(12,13,2);
     //Lift/Elevator
     //lifft = new lift();
+    //intake
+    intaker = new intake(3);
 }
 
 void input::update(){
@@ -44,7 +46,7 @@ void input::update(){
 
     //limelight alignment set to A button
     if (controllerOne->ButtonA()){
-        aligner->setCamera(0);
+        //aligner->setCamera(0);
         float adjustment = aligner->drive();
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)
@@ -58,7 +60,7 @@ void input::update(){
     } else {
         //left and right are the Y axis (joyVector[1])
         //square for non-linear curve (smoother acceleration)
-        aligner->setCamera(1);
+        //aligner->setCamera(1);
         float left = std::abs(LeftStick[1]) * LeftStick[1];
         float right = std::abs(RightStick[1]) * RightStick[1];
         //motors flipped
@@ -97,7 +99,7 @@ void input::update(){
     bool rightTwo = controllerTwo->RightTriggerPressed();
     //IF left is pressed but NOT right, set both 'indexers' at 0.3
     if(leftTwo && !rightTwo){
-        indx->update(0.3);
+        indx->update(0.5);
     }
     //IF NEITHER of them are pressed or BOTH are pressed, set both 'indexers' to 0
     if((!leftTwo && !rightTwo) || (leftTwo && rightTwo)){
@@ -105,8 +107,10 @@ void input::update(){
     }
     //IF right is pressed but not left, set both 'indexers' to -0.3
     if(!leftTwo && rightTwo){
-        indx->update(-0.3);
+        indx->update(-0.5);
     }
+
+    intaker->angle(controllerTwo->LeftJoystick()[1]/2);
 
     //LIFT/ELEVATOR
     /*float leftOne = controllerTwo->LeftTriggerValue();

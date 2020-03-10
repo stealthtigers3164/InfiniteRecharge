@@ -74,12 +74,12 @@ void Robot::AutonomousInit() {
   } else {
     // Default Auto goes here
   }
-  timer = new Timer();
-  timer->Start();
-  fly = new shooter(6);
+  //timer = new Timer();
+  //timer->Start();
+  /*fly = new shooter(6);
   //indexer
   indx = new indexer(4,2, 0);
-  driver = new drive(5, 8, 0, 1);
+  driver = new drive(5, 8, 0, 1);*/
 }
 void Robot::AutonomousPeriodic() {
   if (m_autoSelected == kAutoNameCustom) {
@@ -88,7 +88,7 @@ void Robot::AutonomousPeriodic() {
     // Default Auto goes here
   }
   //add limelight!
-  if(timer->Get() <= 5){
+  /*if(timer->Get() <= 5){
       indx->update(0.3);
       fly->flyyWheel(1);
   }else{
@@ -99,11 +99,11 @@ void Robot::AutonomousPeriodic() {
       driver->update(0.5, 0.5);
   }else{
       driver->update(0,0);
-  }
+  }*/
 }
 
 void Robot::TeleopInit() {
-    timer->Stop();
+    //timer->Stop();
 }
 
 void Robot::TeleopPeriodic() {}

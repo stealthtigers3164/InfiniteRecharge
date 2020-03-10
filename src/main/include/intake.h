@@ -16,7 +16,7 @@ class intake{
         intake(int portAngler);
         //update angle of angler
         //limit switch??
-        void angle(bool toggle);
+        void angle(float toggle);
         //toggle roller (on/off)
         void roll(bool toggle);
 

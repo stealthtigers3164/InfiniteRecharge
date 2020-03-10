@@ -19,8 +19,9 @@ indexer::indexer(int pOne, int pTwo, int portRoller){
 //placeholer update funtion
 //incriment indexer by one -- TODO
 void indexer::update(double power){
-    vOne->Set(power);
-    vTwo->Set(-power);
+    vOne->Set(-power);
+    vTwo->Set(power);
+    roller->Set(power);
 }
 
 //returns the current number of balls in the indexer as counted by the limit switch
@@ -29,4 +30,5 @@ int indexer::countIndex(){
         balls++;
     }
     prevSwitcher = switcher;
+    return(balls);
 }
