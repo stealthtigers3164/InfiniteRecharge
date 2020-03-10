@@ -88,18 +88,22 @@ void Robot::AutonomousPeriodic() {
     // Default Auto goes here
   }
   //add limelight!
-  /*if(timer->Get() <= 5){
-      indx->update(0.3);
-      fly->flyyWheel(1);
+  if(timer->Get() <= 5){
+      std::cout<<(timer->Get());
+      /*indx->update(0.3);
+      fly->flyyWheel(1);*/
   }else{
-      indx->update(0);
-      fly->flyyWheel(0);
+      std::cout<<(timer->Get());
+      //indx->update(0);
+      //fly->flyyWheel(0);
   }
   if(timer->Get() >= 6){
-      driver->update(0.5, 0.5);
+      std::cout<<(timer->Get());
+     // driver->update(0.5, 0.5);
   }else{
-      driver->update(0,0);
-  }*/
+      std::cout<<(timer->Get());
+      //driver->update(0,0);
+  }
 }
 
 void Robot::TeleopInit() {
