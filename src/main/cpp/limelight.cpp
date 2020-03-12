@@ -46,14 +46,14 @@ float limelight::drive(){
 }
 
 
-void setCamera(int mode){
-    std::shared_ptr<NetworkTable> table =  nt::NetworkTableInstance::GetDefault().GetTable("limelight");
+void limelight::setCamera(int mode){
+    //sets camera modes3
     if(mode == 0){
-        table->PutNumber("camMode", 0);
-        table->PutNumber("ledMode", 3);
+        nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("camMode",0);
+        nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("ledMode",3);
     }else{
-        table->PutNumber("camMode", 1);
-        table->PutNumber("ledMode", 1);
+        nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("camMode",1);
+        nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("ledMode",1);
     }
 }
 

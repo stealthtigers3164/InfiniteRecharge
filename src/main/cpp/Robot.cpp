@@ -74,12 +74,12 @@ void Robot::AutonomousInit() {
   } else {
     // Default Auto goes here
   }
-  //timer = new Timer();
-  //timer->Start();
-  /*fly = new shooter(6);
-  //indexer
+  timer = new Timer();
+  timer->Start();
+  fly = new shooter(6);
   indx = new indexer(4,2, 0);
-  driver = new drive(5, 8, 0, 1);*/
+  driver = new drive(5, 8, 0, 1);
+  aligner = new limelight();
 }
 void Robot::AutonomousPeriodic() {
   if (m_autoSelected == kAutoNameCustom) {
@@ -88,26 +88,32 @@ void Robot::AutonomousPeriodic() {
     // Default Auto goes here
   }
   //add limelight!
-  if(timer->Get() <= 5){
-      std::cout<<(timer->Get());
-      /*indx->update(0.3);
-      fly->flyyWheel(1);*/
-  }else{
-      std::cout<<(timer->Get());
-      //indx->update(0);
-      //fly->flyyWheel(0);
+  if(timer->Get() <= 3.0){
+        aligner->setCamera(0); //<-In progress of development
+        float adjustment = aligner->drive();
+        //left and right are the Y axis (joyVector[1])
+        //square for non-linear curve (smoother acceleration)
+        float left = (0 - adjustment);
+        float right = (0 + adjustment);
+        left *= -1;
+        driver->update(left, right);
   }
-  if(timer->Get() >= 6){
-      std::cout<<(timer->Get());
-     // driver->update(0.5, 0.5);
+  if(timer->Get() <= 10.0 && timer->Get() >= 3.0){
+      indx->update(0.3);
+      fly->flyWheel(1);
   }else{
-      std::cout<<(timer->Get());
-      //driver->update(0,0);
+      indx->update(0);
+      fly->flyWheel(0);
+  }
+  if(timer->Get() >= 6.0){
+     driver->update(0.5, 0.5);
+  }else{
+      driver->update(0,0);
   }
 }
 
 void Robot::TeleopInit() {
-    //timer->Stop();
+    timer->Stop();
 }
 
 void Robot::TeleopPeriodic() {}

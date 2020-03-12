@@ -43,4 +43,6 @@ class Robot : public frc::TimedRobot {
   shooter *fly;
 
   drive *driver;
+
+  limelight *aligner;
 };
